@@ -40,33 +40,6 @@ main.home-landing {
     min-height: 0;
   }
 
-  /* —— Products / Explore —— */
-  .products-reveal-stack__card .experience-compass__grid {
-    gap: 0.55rem;
-  }
-
-  .products-reveal-stack__card .experience-compass__card {
-    min-height: clamp(7.5rem, 22vw, 9.5rem);
-    padding: 0.85rem 0.65rem;
-  }
-
-  .products-reveal-stack__card .experience-compass__label {
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-  }
-
-  .products-reveal-stack__card .experience-compass__hint {
-    display: none;
-  }
-
-  .featured-products--sheet .featured-products__inner {
-    padding-inline: clamp(1rem, 4vw, 1.25rem);
-  }
-
-  .featured-products__mosaic {
-    gap: 0.85rem;
-  }
-
   .editorial-product-card__title {
     font-size: clamp(0.95rem, 3.5vw, 1.1rem);
   }
@@ -169,11 +142,6 @@ main.home-landing {
     gap: 0.45rem;
   }
 
-  .products-reveal-stack__card .experience-compass__title {
-    font-size: clamp(1.25rem, 5vw, 1.45rem);
-    margin-bottom: 1rem;
-  }
-
   .featured-products__eyebrow,
   .featured-products__view-all {
     font-size: 0.58rem;
@@ -188,24 +156,23 @@ main.home-landing {
   }
 }
 
-/* Short phones — reduce vertical traps */
-@media (max-width: 768px) and (max-height: 700px) {
-  .hero-reveal-stack--scrub .hero-reveal-stack__card {
-    min-height: 100svh;
-    height: 100svh;
+/* Native scroll on touch — avoid Lenis + heavy pin fighting the browser */
+@media (max-width: 768px), (pointer: coarse) {
+  html {
+    scroll-behavior: auto;
   }
 
-  .hero-reveal-stack--scrub .brand-welcome--sheet {
-    min-height: auto;
-    padding-top: 1.5rem !important;
-    padding-bottom: 2rem !important;
-  }
-
-  .booking-steps-mini--photo {
-    padding: 1.75rem 0;
+  .hero-reveal-stack__pin {
+    touch-action: pan-y;
   }
 
   .services-reveal-stack--scrub .services-reveal-stack__pin {
-    padding-top: calc(var(--header-h) + 0.5rem);
+    padding-top: calc(var(--header-h) + 0.65rem);
+  }
+}
+
+@media (max-width: 768px) and (max-height: 700px) {
+  .booking-steps-mini--photo {
+    padding: 1.75rem 0;
   }
 }

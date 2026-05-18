@@ -90,41 +90,6 @@ body.is-hero-collapsing .hero-reveal-stack .hero-ads__pagination {
   pointer-events: none;
 }
 
-/* Mobile / short — natural scroll (no viewport pin trap) */
-.hero-reveal-stack--scrub,
-.hero-reveal-stack--scrub .hero-reveal-stack__pin {
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-.hero-reveal-stack--scrub .hero-reveal-stack__card {
-  position: relative;
-  inset: auto;
-  height: 100svh;
-  height: 100dvh;
-  min-height: 100dvh;
-  max-height: 100dvh;
-}
-
-.hero-reveal-stack--scrub .brand-welcome--sheet {
-  position: relative;
-  inset: auto;
-  min-height: 0;
-  padding-top: clamp(2rem, 6vw, 3rem) !important;
-  padding-bottom: clamp(2.5rem, 8vw, 4rem) !important;
-}
-
-body.is-hero-collapsed .hero-reveal-stack--scrub .hero-reveal-stack__card {
-  visibility: hidden;
-  pointer-events: none;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  overflow: hidden;
-}
-
 /* Welcome CTA — same pill as hero ads, inverted for white sheet */
 .brand-welcome__cta-pill.hero-ads__cta-pill {
   margin-top: clamp(1.35rem, 3.5vw, 2.1rem);

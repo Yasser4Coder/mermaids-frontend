@@ -1,14 +1,16 @@
 import { useLayoutEffect } from "react";
 import { gsap, ScrollTrigger } from "../lib/gsap";
-import { isShortViewport, SALON_PINNED_MQ, shouldPinSalonReveal } from "../lib/viewport";
+import { mobileScrollTimeline, skipRevealIfInView } from "../lib/mobileReveal";
+import {
+  getRevealScrollLength,
+  isNarrowViewport,
+  isShortViewport,
+  SALON_PINNED_MQ,
+  shouldPinSalonReveal,
+} from "../lib/viewport";
 
 const LUXURY_EASE = "power2.inOut";
 
-/**
- * Salon showcase reveal — pinned scrub on large viewports; scroll-through scrub on short/narrow.
- * @param {import('react').RefObject<HTMLElement | null>} stackRef
- * @param {import('react').RefObject<HTMLElement | null>} pinRef
- */
 export function useSalonServicesScrollTrigger(stackRef, pinRef) {
   useLayoutEffect(() => {
     const stack = stackRef.current;
@@ -27,10 +29,13 @@ export function useSalonServicesScrollTrigger(stackRef, pinRef) {
     const footer = pin.querySelector(".mermaid-collection__footer");
     const allTargets = [...headBits, ...cards, footer].filter(Boolean);
 
+    const revealAll = () => {
+      gsap.set(allTargets, { opacity: 1, y: 0, scale: 1, clearProps: "all" });
+    };
+
     if (reduced) {
       stack.classList.remove("services-reveal-stack--scrub");
-      gsap.set(pin, { clearProps: "all" });
-      gsap.set(allTargets, { clearProps: "all", opacity: 1, y: 0, scale: 1 });
+      revealAll();
       return () => {
         window.removeEventListener("load", refresh);
         window.removeEventListener("resize", refresh);
@@ -43,76 +48,81 @@ export function useSalonServicesScrollTrigger(stackRef, pinRef) {
       ctx?.revert();
       ctx = gsap.context(() => {
         const pinned = shouldPinSalonReveal();
+        const narrow = isNarrowViewport();
         const short = isShortViewport();
 
         stack.classList.toggle("services-reveal-stack--scrub", !pinned);
 
-        const headY = short ? 22 : 36;
-        const cardY = short ? 36 : 72;
-        const cardScale = short ? 0.94 : 0.9;
+        const headY = narrow ? 10 : short ? 22 : 36;
+        const cardY = narrow ? 14 : short ? 36 : 72;
+        const cardScale = narrow ? 1 : short ? 0.94 : 0.9;
 
         gsap.set(headBits, { opacity: 0, y: headY });
         gsap.set(cards, { opacity: 0, y: cardY, scale: cardScale });
-        if (footer) gsap.set(footer, { opacity: 0, y: short ? 16 : 24 });
+        if (footer) gsap.set(footer, { opacity: 0, y: narrow ? 8 : short ? 16 : 24 });
 
-        /* Scrub: animate while section top moves from bottom edge into view (not while scrolling past it) */
-        const scrubEnd = short ? "top 28%" : "top 22%";
+        if (narrow) {
+          if (!skipRevealIfInView(stack, revealAll)) {
+            mobileScrollTimeline(stack, {
+              revealAll,
+              steps: [
+                { elements: headBits, to: { opacity: 1, y: 0 }, duration: 0.44, stagger: 0.04, at: 0 },
+                { elements: cards, to: { opacity: 1, y: 0, scale: 1 }, duration: 0.5, stagger: 0.06, at: 0.08 },
+                ...(footer
+                  ? [{ elements: [footer], to: { opacity: 1, y: 0 }, duration: 0.4, at: 0.22 }]
+                  : []),
+              ],
+            });
+          }
+          requestAnimationFrame(() => ScrollTrigger.refresh());
+          return;
+        }
 
         const scrollTrigger = pinned
           ? {
               trigger: stack,
               start: "top top",
-              end: () => `+=${window.innerHeight * 1.05}`,
+              end: () => `+=${getRevealScrollLength(narrow ? 0.75 : 0.95)}`,
               pin,
-              scrub: 1.1,
-              anticipatePin: 1,
+              scrub: narrow ? 0.85 : 1.05,
+              anticipatePin: narrow ? 0 : 1,
               invalidateOnRefresh: true,
+              onLeave: () => revealAll(),
             }
           : {
               trigger: stack,
-              start: "top bottom",
-              end: scrubEnd,
-              scrub: 1,
+              start: narrow ? "top 92%" : "top bottom",
+              end: () => `+=${getRevealScrollLength(0.7)}`,
+              scrub: 0.85,
               invalidateOnRefresh: true,
-              /* Keep fully revealed once user has scrolled into the section */
+              onEnter: (self) => {
+                if (self.progress > 0.2) revealAll();
+              },
               onLeave: (self) => {
-                if (self.progress >= 0.99) {
-                  gsap.set(allTargets, { opacity: 1, y: 0, scale: 1 });
-                }
+                if (self.progress >= 0.98) revealAll();
               },
               onLeaveBack: (self) => {
-                if (self.progress <= 0.01) {
+                if (self.progress <= 0.02) {
                   gsap.set(headBits, { opacity: 0, y: headY });
                   gsap.set(cards, { opacity: 0, y: cardY, scale: cardScale });
-                  if (footer) gsap.set(footer, { opacity: 0, y: short ? 16 : 24 });
+                  if (footer) gsap.set(footer, { opacity: 0, y: narrow ? 12 : short ? 16 : 24 });
                 }
               },
             };
 
-        const tl = gsap.timeline({
-          defaults: { ease: "none" },
-          scrollTrigger,
-        });
+        const tl = gsap.timeline({ defaults: { ease: "none" }, scrollTrigger });
 
         if (pinned) {
           tl.to(headBits, { opacity: 1, y: 0, duration: 0.28, stagger: 0.06, ease: LUXURY_EASE }, 0.06);
-          tl.to(
-            cards,
-            { opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.09, ease: LUXURY_EASE },
-            0.28
-          );
+          tl.to(cards, { opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.09, ease: LUXURY_EASE }, 0.28);
           if (footer) {
             tl.to(footer, { opacity: 1, y: 0, duration: 0.22, ease: LUXURY_EASE }, 0.72);
           }
         } else {
-          tl.to(headBits, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: LUXURY_EASE }, 0.08);
-          tl.to(
-            cards,
-            { opacity: 1, y: 0, scale: 1, duration: 0.35, stagger: 0.08, ease: LUXURY_EASE },
-            0.38
-          );
+          tl.to(headBits, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: LUXURY_EASE }, 0.06);
+          tl.to(cards, { opacity: 1, y: 0, scale: 1, duration: 0.35, stagger: 0.08, ease: LUXURY_EASE }, 0.32);
           if (footer) {
-            tl.to(footer, { opacity: 1, y: 0, duration: 0.18, ease: LUXURY_EASE }, 0.82);
+            tl.to(footer, { opacity: 1, y: 0, duration: 0.18, ease: LUXURY_EASE }, 0.78);
           }
         }
 

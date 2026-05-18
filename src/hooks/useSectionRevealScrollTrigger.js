@@ -1,22 +1,16 @@
 import { useLayoutEffect } from "react";
 import { gsap, ScrollTrigger } from "../lib/gsap";
-import { isShortViewport } from "../lib/viewport";
+import {
+  MOBILE_REVEAL_START,
+  mobileScrollTimeline,
+  skipRevealIfInView,
+} from "../lib/mobileReveal";
+import { getRevealScrollLength, isNarrowViewport, isShortViewport } from "../lib/viewport";
 
 const LUXURY_EASE = "power2.inOut";
 
 /**
- * Scroll-scrub reveal for standalone home sections (trust, booking, CTA).
- * @param {import('react').RefObject<HTMLElement | null>} sectionRef
- * @param {{
- *   targets?: string;
- *   slideTargets?: string;
- *   fadeTargets?: string;
- *   stagger?: number;
- *   y?: number;
- *   start?: string;
- *   end?: string;
- *   scrub?: number;
- * }} [config]
+ * Scroll reveal for home sections. Mobile uses play-on-enter (no scrub) for smoother touch scroll.
  */
 export function useSectionRevealScrollTrigger(sectionRef, config = {}) {
   const {
@@ -45,8 +39,13 @@ export function useSectionRevealScrollTrigger(sectionRef, config = {}) {
 
     if (!allEls.length) return;
 
+    const revealAll = () => {
+      gsap.set(slideEls, { opacity: 1, y: 0, clearProps: "transform,opacity" });
+      gsap.set(fadeEls, { opacity: 1, clearProps: "opacity" });
+    };
+
     if (reduced) {
-      gsap.set(allEls, { clearProps: "all", opacity: 1, y: 0, scale: 1 });
+      revealAll();
       return () => {
         window.removeEventListener("load", refresh);
         window.removeEventListener("resize", refresh);
@@ -58,27 +57,68 @@ export function useSectionRevealScrollTrigger(sectionRef, config = {}) {
     const build = () => {
       ctx?.revert();
       ctx = gsap.context(() => {
+        const narrow = isNarrowViewport();
         const short = isShortViewport();
-        const y = yOverride ?? (short ? 18 : 28);
-        const scrubEnd = endOverride ?? (short ? "top 36%" : "top 44%");
+        const y = yOverride ?? (narrow ? 10 : short ? 18 : 28);
 
         gsap.set(slideEls, { opacity: 0, y });
         gsap.set(fadeEls, { opacity: 0 });
 
+        if (narrow) {
+          const mobileStart = start === "top bottom" ? MOBILE_REVEAL_START : start;
+          const steps = [];
+
+          if (slideEls.length) {
+            steps.push({
+              elements: slideEls,
+              to: { opacity: 1, y: 0 },
+              duration: 0.48,
+              stagger,
+              at: 0,
+            });
+          }
+          if (fadeEls.length) {
+            steps.push({
+              elements: fadeEls,
+              to: { opacity: 1 },
+              duration: 0.42,
+              at: slideEls.length ? 0.1 : 0,
+            });
+          }
+
+          if (!skipRevealIfInView(section, revealAll)) {
+            mobileScrollTimeline(section, { revealAll, start: mobileStart, steps });
+          }
+
+          requestAnimationFrame(() => ScrollTrigger.refresh());
+          return;
+        }
+
+        if (skipRevealIfInView(section, revealAll)) {
+          requestAnimationFrame(() => ScrollTrigger.refresh());
+          return;
+        }
+
+        const scrollEnd =
+          typeof endOverride === "function"
+            ? endOverride
+            : endOverride ??
+              (short ? () => `+=${getRevealScrollLength(0.55)}` : "top 44%");
+
         const scrollTrigger = {
           trigger: section,
           start,
-          end: scrubEnd,
+          end: scrollEnd,
           scrub: scrubAmount,
           invalidateOnRefresh: true,
+          onEnter: (self) => {
+            if (self.progress > 0.12) revealAll();
+          },
           onLeave: (self) => {
-            if (self.progress >= 0.99) {
-              gsap.set(slideEls, { opacity: 1, y: 0 });
-              gsap.set(fadeEls, { opacity: 1 });
-            }
+            if (self.progress >= 0.98) revealAll();
           },
           onLeaveBack: (self) => {
-            if (self.progress <= 0.01) {
+            if (self.progress <= 0.02) {
               gsap.set(slideEls, { opacity: 0, y });
               gsap.set(fadeEls, { opacity: 0 });
             }
@@ -88,10 +128,10 @@ export function useSectionRevealScrollTrigger(sectionRef, config = {}) {
         const tl = gsap.timeline({ defaults: { ease: "none" }, scrollTrigger });
 
         if (slideEls.length) {
-          tl.to(slideEls, { opacity: 1, y: 0, duration: 0.5, stagger, ease: LUXURY_EASE }, 0.1);
+          tl.to(slideEls, { opacity: 1, y: 0, duration: 0.5, stagger, ease: LUXURY_EASE }, 0.08);
         }
         if (fadeEls.length) {
-          tl.to(fadeEls, { opacity: 1, duration: 0.45, ease: LUXURY_EASE }, slideEls.length ? 0.42 : 0.12);
+          tl.to(fadeEls, { opacity: 1, duration: 0.45, ease: LUXURY_EASE }, slideEls.length ? 0.4 : 0.1);
         }
 
         requestAnimationFrame(() => ScrollTrigger.refresh());

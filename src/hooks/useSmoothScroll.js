@@ -3,19 +3,24 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { gsap, ScrollTrigger } from "../lib/gsap";
 import { destroyLenis, scrollTo, setLenis } from "../lib/smoothScroll";
+import { shouldUseNativeScroll } from "../lib/viewport";
 
 export function useSmoothScroll() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    if (reduced || shouldUseNativeScroll()) {
+      destroyLenis();
+      return;
+    }
 
     const lenis = new Lenis({
-      duration: 1.12,
+      duration: 1.08,
       easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.65,
+      touchMultiplier: 1,
+      syncTouch: false,
     });
 
     setLenis(lenis);
@@ -34,6 +39,6 @@ export function useSmoothScroll() {
 
   useEffect(() => {
     scrollTo(0, { immediate: true });
-    ScrollTrigger.refresh();
+    requestAnimationFrame(() => ScrollTrigger.refresh());
   }, [pathname]);
 }
