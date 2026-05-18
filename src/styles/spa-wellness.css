@@ -1,0 +1,146 @@
+/* Spa reveal stack — bridge + GSAP (layout uses legacy .spa-wellness) */
+
+.spa-reveal-stack {
+  position: relative;
+  z-index: 1;
+}
+
+.spa-reveal-stack__pin {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Salon → spa handoff */
+.spa-reveal-bridge {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: clamp(2.5rem, 6vh, 4rem);
+  padding: clamp(0.75rem, 2vh, 1.25rem) clamp(1rem, 4vw, 2rem) clamp(0.15rem, 0.5vh, 0.35rem);
+  pointer-events: none;
+}
+
+.spa-reveal-bridge__sheen {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      ellipse 70% 55% at 50% 0%,
+      rgba(185, 143, 59, 0.1) 0%,
+      transparent 68%
+    ),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(232, 180, 200, 0.12) 0%, transparent 70%);
+  opacity: 0;
+  transform-origin: 50% 40%;
+  will-change: opacity, transform;
+}
+
+.spa-reveal-bridge__line {
+  position: relative;
+  z-index: 1;
+  width: min(11rem, 58vw);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(185, 143, 59, 0.35) 18%,
+    var(--c-gold) 50%,
+    rgba(185, 143, 59, 0.35) 82%,
+    transparent 100%
+  );
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.spa-reveal-bridge__label {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(0.58rem, 1.4vw, 0.65rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  will-change: transform, opacity;
+}
+
+/* GSAP targets inside editorial spa */
+.spa-reveal-stack .spa-wellness__intro,
+.spa-reveal-stack .spa-wellness__strip,
+.spa-reveal-stack .spa-wellness__closing {
+  will-change: transform, opacity;
+}
+
+.spa-reveal-stack:not(.spa-reveal-stack--scrub) .spa-reveal-stack__pin {
+  min-height: 0;
+}
+
+.spa-reveal-stack:not(.spa-reveal-stack--scrub) .spa-wellness {
+  padding-top: 0;
+}
+
+/* Tighter seam spa → clinic */
+.spa-reveal-stack .spa-wellness {
+  padding-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+
+.spa-reveal-stack + .clinic-reveal-stack {
+  margin-top: 0;
+}
+
+.spa-reveal-stack + .clinic-reveal-stack .clinic-suite--editorial {
+  padding-top: clamp(2rem, 5vw, 3rem);
+  border-top: none;
+}
+
+.spa-reveal-stack + .clinic-reveal-stack:not(.clinic-reveal-stack--scrub) .clinic-reveal-stack__pin {
+  padding-top: calc(var(--header-h) + 0.35rem);
+  min-height: 0;
+}
+
+/* Scrub — natural document flow for tall strip layout */
+.spa-reveal-stack--scrub,
+.spa-reveal-stack--scrub .spa-reveal-stack__pin {
+  min-height: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+  .spa-reveal-stack {
+    scroll-margin-top: calc(var(--header-h) + 8px);
+    overflow: visible;
+    z-index: 1;
+    clear: both;
+    isolation: isolate;
+  }
+
+  .spa-reveal-bridge {
+    min-height: 3rem;
+    padding-top: 1.25rem;
+    padding-bottom: 0.15rem;
+  }
+
+  .spa-reveal-bridge__label {
+    letter-spacing: 0.22em;
+    font-size: 0.56rem;
+  }
+
+  .spa-reveal-stack .spa-wellness {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spa-reveal-stack .spa-wellness__intro,
+  .spa-reveal-stack .spa-wellness__strip,
+  .spa-reveal-stack .spa-wellness__closing {
+    will-change: auto;
+  }
+}

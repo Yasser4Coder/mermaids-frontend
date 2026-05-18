@@ -1,0 +1,528 @@
+/* Services reveal stack — GSAP ScrollTrigger pin */
+
+.services-reveal-stack {
+  position: relative;
+  z-index: 1;
+}
+
+.services-reveal-stack__pin {
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding-top: calc(var(--header-h) + clamp(1.25rem, 3.5vh, 2.25rem));
+}
+
+/* Showcase salon section (editorial card row) */
+.mermaid-collection--showcase {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 0 0 clamp(2.75rem, 7vw, 4.5rem);
+  scroll-margin-top: calc(var(--header-h) + 12px);
+  background: linear-gradient(168deg, #f4f2ef 0%, var(--c-pink-50) 38%, var(--c-pink-100) 100%);
+}
+
+.mermaid-collection--showcase .mermaid-collection__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.mermaid-collection--showcase .mermaid-collection__glow {
+  position: absolute;
+  inset: -16% -10% auto;
+  height: 55%;
+  background: radial-gradient(ellipse 65% 55% at 50% 0%, rgba(185, 143, 59, 0.14) 0%, transparent 72%),
+    radial-gradient(ellipse 45% 45% at 85% 35%, rgba(232, 180, 200, 0.2) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* Wave stack + sparkles: styles in legacy.css (.mermaid-collection--tide) */
+.mermaid-collection--showcase.mermaid-collection--tide .mermaid-collection__wave-stack {
+  z-index: 0;
+}
+
+.mermaid-collection--showcase.mermaid-collection--tide .mermaid-collection__sparkles {
+  z-index: 0;
+}
+
+.mermaid-collection--showcase .mermaid-collection__wrap {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1280px);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+.mermaid-collection--showcase .mermaid-collection__head {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto clamp(1.75rem, 4.5vw, 2.75rem);
+}
+
+.mermaid-collection--showcase .mermaid-collection__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+.mermaid-collection--showcase .mermaid-collection__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--c-ink);
+}
+
+.mermaid-collection--showcase .mermaid-collection__tagline {
+  margin: 0 0 1rem;
+  font-family: var(--font-serif);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--c-muted);
+}
+
+.mermaid-collection--showcase .mermaid-collection__lede {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 36rem;
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-size: clamp(0.88rem, 1.8vw, 0.98rem);
+  line-height: 1.62;
+  color: var(--c-muted);
+}
+
+.mermaid-collection--showcase .mermaid-collection__lede-sub {
+  margin-top: 0.45rem;
+  padding-top: 0;
+  border-top: none;
+  font-size: inherit;
+}
+
+.mermaid-collection--showcase .mermaid-collection__rule {
+  margin-top: 1.1rem;
+}
+
+.mermaid-collection__showcase {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.2vw, 0.85rem);
+  align-items: stretch;
+}
+
+/* Editorial service card */
+a.salon-showcase-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4.15;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--c-white);
+  background: #1a1416;
+  box-shadow: 0 12px 40px rgba(18, 10, 14, 0.12);
+  transform-origin: 50% 80%;
+  will-change: transform, opacity;
+}
+
+.salon-showcase-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.salon-showcase-card__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 8, 10, 0.05) 0%,
+    rgba(12, 8, 10, 0.08) 42%,
+    rgba(12, 8, 10, 0.72) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.salon-showcase-card__content {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.salon-showcase-card__title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.salon-showcase-card__count {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.salon-showcase-card__hint {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 14rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.salon-showcase-card__prices {
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.salon-showcase-card__prices li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.salon-showcase-card__prices li:last-child {
+  border-bottom: none;
+}
+
+.salon-showcase-card__prices abbr {
+  text-decoration: none;
+}
+
+.salon-showcase-card__icon {
+  position: absolute;
+  right: clamp(0.85rem, 2vw, 1.1rem);
+  bottom: clamp(0.85rem, 2vw, 1.1rem);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  opacity: 0.85;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+a.salon-showcase-card:hover .salon-showcase-card__img,
+a.salon-showcase-card:focus-visible .salon-showcase-card__img {
+  transform: scale(1.06);
+}
+
+a.salon-showcase-card:hover .salon-showcase-card__hint,
+a.salon-showcase-card:focus-visible .salon-showcase-card__hint,
+a.salon-showcase-card:hover .salon-showcase-card__prices,
+a.salon-showcase-card:focus-visible .salon-showcase-card__prices {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+a.salon-showcase-card:hover .salon-showcase-card__icon,
+a.salon-showcase-card:focus-visible .salon-showcase-card__icon {
+  transform: scale(1.08) rotate(-8deg);
+}
+
+a.salon-showcase-card:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 3px;
+}
+
+.mermaid-collection__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  text-align: center;
+}
+
+.mermaid-collection__view-all {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--c-ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.25s ease;
+}
+
+.mermaid-collection__view-all:hover {
+  color: var(--c-pink-deep);
+}
+
+.mermaid-collection__book-pill {
+  margin-top: 0 !important;
+  border-color: rgba(26, 20, 22, 0.82) !important;
+  color: var(--c-ink) !important;
+}
+
+.mermaid-collection__book-pill:hover {
+  background: var(--c-ink) !important;
+  color: var(--c-white) !important;
+}
+
+@media (min-width: 769px) {
+  a.salon-showcase-card {
+    min-height: 240px;
+  }
+}
+
+@media (min-width: 1101px) {
+  a.salon-showcase-card {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mermaid-collection__showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  a.salon-showcase-card {
+    aspect-ratio: 4 / 4.6;
+  }
+}
+
+/* Scrub reveal (short / narrow) — full section height, no viewport pin trap */
+.services-reveal-stack--scrub,
+.services-reveal-stack--scrub .services-reveal-stack__pin {
+  min-height: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.services-reveal-stack--scrub .services-reveal-stack__pin {
+  padding-top: calc(var(--header-h) + 0.85rem);
+}
+
+/* Mobile layout — typography & grid (animation via scrub mode in JS) */
+@media (max-width: 768px) {
+  .services-reveal-stack {
+    scroll-margin-top: calc(var(--header-h) + 8px);
+    overflow: visible;
+    z-index: 2;
+  }
+
+  .mermaid-collection--showcase {
+    overflow: visible;
+  }
+
+  .mermaid-collection--showcase.section {
+    padding: 2.25rem 0 3.5rem;
+    scroll-margin-top: calc(var(--header-h) + 8px);
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__ambient {
+    z-index: 0;
+  }
+
+  .mermaid-collection--showcase.mermaid-collection--tide .mermaid-collection__wave-stack {
+    height: clamp(64px, 14vw, 100px);
+    z-index: 0;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  .mermaid-collection__showcase {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 0.25rem;
+  }
+
+  .mermaid-collection__footer {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 0.5rem;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__head {
+    margin-bottom: 1.25rem;
+    padding-inline: 0.5rem;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.4rem;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__title {
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__tagline {
+    font-size: 0.92rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__lede {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    max-width: 32rem;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__lede-sub {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .mermaid-collection--showcase .mermaid-collection__wrap {
+    padding-inline: 1rem;
+  }
+
+  .mermaid-collection__showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  a.salon-showcase-card {
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(18, 10, 14, 0.14);
+  }
+
+  .salon-showcase-card__content {
+    padding: 0.75rem;
+    gap: 0.15rem;
+  }
+
+  .salon-showcase-card__title {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    line-height: 1.25;
+  }
+
+  .salon-showcase-card__count {
+    font-size: 0.65rem;
+  }
+
+  /* Tap card for full menu — keep overlay clean on small screens */
+  .salon-showcase-card__hint,
+  .salon-showcase-card__prices {
+    display: none;
+  }
+
+  .salon-showcase-card__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .mermaid-collection__footer {
+    margin-top: 1.5rem;
+    gap: 0.85rem;
+    padding-inline: 0.5rem;
+  }
+
+  .mermaid-collection__view-all {
+    font-size: 0.8rem;
+  }
+
+  .mermaid-collection__book-pill {
+    display: inline-block;
+    width: 100%;
+    max-width: 18rem;
+    text-align: center;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.6rem !important;
+    letter-spacing: 0.14em !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .mermaid-collection--showcase .mermaid-collection__wrap {
+    padding-inline: 0.75rem;
+  }
+
+  .mermaid-collection__showcase {
+    gap: 0.5rem;
+  }
+
+  a.salon-showcase-card {
+    aspect-ratio: 3 / 3.85;
+    border-radius: 8px;
+  }
+
+  .salon-showcase-card__title {
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-reveal-stack__pin {
+    min-height: auto;
+  }
+
+  a.salon-showcase-card {
+    will-change: auto;
+  }
+
+  .salon-showcase-card__img {
+    transition: none;
+  }
+}

@@ -1,0 +1,25 @@
+@import "lenis/dist/lenis.css";
+@import "./styles/legacy.css";
+@import "./styles/hero-ads.css";
+@import "./styles/hero-reveal.css";
+@import "./styles/salon-services.css";
+@import "./styles/spa-wellness.css";
+@import "./styles/clinic-suite.css";
+@import "./styles/products-reveal.css";
+@import "./styles/featured-products.css";
+@import "./styles/home-closing.css";
+@import "./styles/mobile-header.css";
+@import "./styles/short-viewport.css";
+@import "./styles/responsive.css";
+@import "./styles/landing-mobile.css";
+@import "swiper/css";
+@import "swiper/css/effect-fade";
+
+/* Swiper controls for promo carousel (matches original landing) */
+.promo-ads-swiper .swiper-button-prev,
+.promo-ads-swiper .swiper-button-next {
+  color: var(--c-white);
+}
+.promo-ads-swiper .swiper-pagination-bullet-active {
+  background: var(--c-gold);
+}

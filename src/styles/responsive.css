@@ -1,0 +1,37 @@
+/* Mobile helpers — scoped only */
+
+.mermaid-collection--showcase .mermaid-collection__rule {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .contact-rail {
+    top: auto;
+    bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .contact-rail {
+    bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 520px) {
+  .contact-rail__btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Spa stack sits below salon cards — no overlap */
+@media (max-width: 768px) {
+  .spa-wellness {
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+    clear: both;
+    isolation: isolate;
+  }
+}

@@ -1,0 +1,58 @@
+export const SALON_MENU_CARDS = [
+  {
+    id: "hair",
+    to: "/services#salon",
+    image: "/images/Hair_colour_service.png",
+    alt: "Hair salon — cutting and colour",
+    heading: "Haircuts",
+    hint: "Harmonious beauty… refined style",
+    icon: "fa-solid fa-scissors",
+    items: [
+      { name: "Cut & blow-dry", price: "4 500" },
+      { name: "Colour", price: "3 000" },
+      { name: "Balayage", price: "18 000" },
+    ],
+  },
+  {
+    id: "skin",
+    to: "/services#soin-visage",
+    image: "/images/Skin_glow_service.png",
+    alt: "Facial and skin glow treatment",
+    heading: "Makeup",
+    hint: "From the first touch to the last detail… beauty worthy of you",
+    icon: "fa-solid fa-wand-magic-sparkles",
+    items: [
+      { name: "Mermaid facial", price: "12 000" },
+      { name: "Hydrafacial", price: "6 500" },
+      { name: "Anti-age protocol", price: "10 500" },
+    ],
+  },
+  {
+    id: "nails",
+    to: "/services#onglerie",
+    image: "/images/Nails_service.png",
+    alt: "Manicure and nail art",
+    heading: "Nails",
+    hint: "Your details create your elegance",
+    icon: "fa-solid fa-hand-sparkles",
+    items: [
+      { name: "Manucure russe", price: "1 500" },
+      { name: "Gel naturel", price: "3 500" },
+      { name: "Extension gel", price: "5 000" },
+    ],
+  },
+  {
+    id: "spa",
+    to: "/services#hammam",
+    image: "/images/Hammam_spa_service.png",
+    alt: "Hammam and spa ritual",
+    heading: "Spa",
+    hint: "Moments of calm… luxury that pampers your senses",
+    icon: "fa-solid fa-spa",
+    items: [
+      { name: "Hammam simple", price: "1 000" },
+      { name: "Hammam Royal", price: "12 000" },
+      { name: "Hammam mariée", price: "15 000" },
+    ],
+  },
+];

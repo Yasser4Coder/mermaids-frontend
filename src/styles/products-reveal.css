@@ -1,0 +1,47 @@
+/* Explore + Products — normal document flow (no sticky / overlay) */
+
+.products-reveal-stack {
+  position: relative;
+  z-index: auto;
+  isolation: auto;
+  background: linear-gradient(180deg, var(--c-pink-50) 0%, #f7f3ee 28%, #f7f3ee 100%);
+}
+
+.products-reveal-stack .experience-compass {
+  position: relative;
+  z-index: auto;
+  margin: 0;
+  padding: clamp(2rem, 6vw, 3.25rem) 0 clamp(1.25rem, 4vw, 2rem);
+  background: transparent;
+  border: none;
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.products-reveal-stack .featured-products--sheet {
+  position: relative;
+  z-index: auto;
+  inset: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  overflow: visible;
+  padding: calc(var(--header-h) + env(safe-area-inset-top, 0px) + clamp(0.75rem, 2.5vw, 1.25rem)) 0
+    clamp(2.5rem, 6vw, 4rem);
+  background: #f7f3ee;
+  scroll-margin-top: calc(var(--header-h) + 8px);
+}
+
+.products-reveal-stack .featured-products--sheet .featured-products__inner {
+  flex: none;
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  .products-reveal-stack .experience-compass {
+    padding: clamp(1.5rem, 5vw, 2rem) 0 clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .products-reveal-stack .featured-products--sheet {
+    padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 0.75rem);
+  }
+}

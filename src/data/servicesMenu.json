@@ -1,0 +1,751 @@
+[
+  {
+    "id": "salon",
+    "title": "Salon — coiffure",
+    "description": "Brushing, coupes, couleur, lissages et coiffures événementielles.",
+    "subsections": [
+      {
+        "title": "Brushing",
+        "items": [
+          {
+            "name": "Rinçage",
+            "price": "500 DA"
+          },
+          {
+            "name": "Rinçage avec Kérastase",
+            "price": "2 500 DA"
+          },
+          {
+            "name": "Rinçage avec massage",
+            "price": "1 000 DA"
+          },
+          {
+            "name": "Brushing cheveux courts",
+            "price": "600 DA"
+          },
+          {
+            "name": "Brushing mi-long",
+            "price": "800 DA"
+          },
+          {
+            "name": "Brushing long",
+            "price": "1 000 – 1 200 DA"
+          },
+          {
+            "name": "Brushing extra-long",
+            "price": "1 500 DA"
+          }
+        ]
+      },
+      {
+        "title": "Coupe",
+        "items": [
+          {
+            "name": "Égalisation",
+            "price": "500 DA"
+          },
+          {
+            "name": "Coupe",
+            "price": "1 000 DA"
+          },
+          {
+            "name": "Les fourches",
+            "price": "1 200 DA"
+          }
+        ]
+      },
+      {
+        "title": "Coloration",
+        "items": [
+          {
+            "name": "Coloration produit n°1",
+            "price": "à partir de 5 000 DA"
+          },
+          {
+            "name": "Coloration produit n°2",
+            "price": "à partir de 3 000 DA"
+          },
+          {
+            "name": "Balayage",
+            "price": "à partir de 18 000 DA"
+          },
+          {
+            "name": "Mèches",
+            "price": "à partir de 9 000 DA"
+          }
+        ]
+      },
+      {
+        "title": "Soin lissant",
+        "items": [
+          {
+            "name": "Filler",
+            "price": "à partir de 9 000 DA"
+          },
+          {
+            "name": "Soin RP",
+            "price": "à partir de 14 000 DA"
+          },
+          {
+            "name": "Soin indien",
+            "price": "à partir de 16 000 DA"
+          },
+          {
+            "name": "Soin brésilien",
+            "price": "à partir de 18 000 DA"
+          },
+          {
+            "name": "Soin Nashi",
+            "price": "à partir de 24 000 DA"
+          }
+        ]
+      },
+      {
+        "title": "Soin réparateur",
+        "items": [
+          {
+            "name": "SOS",
+            "price": "à partir de 9 000 DA la dose"
+          },
+          {
+            "name": "Plastica",
+            "price": "à partir de 12 000 DA la dose"
+          },
+          {
+            "name": "Nashi",
+            "price": "à partir de 14 000 DA la dose"
+          },
+          {
+            "name": "Olaplex",
+            "price": "à partir de 4 500 DA"
+          },
+          {
+            "name": "Créotherapie",
+            "price": "10 000 DA"
+          }
+        ]
+      },
+      {
+        "title": "Coiffures",
+        "items": [
+          {
+            "name": "Ondulé",
+            "price": "à partir de 2 500 DA"
+          },
+          {
+            "name": "Wavy",
+            "price": "à partir de 6 000 DA"
+          },
+          {
+            "name": "Coiffure invitée",
+            "price": "à partir de 4 500 DA"
+          },
+          {
+            "name": "Coiffure + maquillage mariée",
+            "price": "à partir de 15 000 DA"
+          },
+          {
+            "name": "Coiffure + maquillage haute gamme mariée",
+            "price": "à partir de 25 000 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "soin-visage",
+    "title": "Soin de visage",
+    "description": "Soins ciblés et protocoles premium.",
+    "subsections": [
+      {
+        "title": null,
+        "items": [
+          {
+            "name": "Phototherapy",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Hydrafacial",
+            "price": "6 500 DA"
+          },
+          {
+            "name": "Soin nourrissant",
+            "price": "7 000 DA"
+          },
+          {
+            "name": "Soin hydratant",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Soin anti-âge",
+            "price": "10 500 DA"
+          },
+          {
+            "name": "Soin collagen",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Soin anti-rides",
+            "price": "8 000 DA"
+          },
+          {
+            "name": "Abonnement (6 séances)",
+            "price": "35 000 DA"
+          },
+          {
+            "name": "Moulage",
+            "price": "2 500 DA"
+          },
+          {
+            "name": "Soin du contour des yeux",
+            "price": "25 000 DA (5 séances)"
+          },
+          {
+            "name": "Soin apaisant",
+            "price": "7 000 DA"
+          },
+          {
+            "name": "Soin éclaircissant",
+            "price": "6 000 DA"
+          },
+          {
+            "name": "Soin rafraîchissant",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Soin matifiant",
+            "price": "6 000 DA"
+          },
+          {
+            "name": "Soin Mermaid",
+            "price": "12 000 DA"
+          },
+          {
+            "name": "Soin Glowing",
+            "price": "3 000 DA"
+          },
+          {
+            "name": "Soin Hydraback",
+            "price": "14 000 DA"
+          },
+          {
+            "name": "Soin Hydraback Basic",
+            "price": "7 000 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "onglerie",
+    "title": "Onglerie",
+    "description": "Manucure, pose gel / acrylique, pédicure.",
+    "subsections": [
+      {
+        "title": "Manucure",
+        "items": [
+          {
+            "name": "Manucure russe",
+            "price": "1 500 DA"
+          },
+          {
+            "name": "VSP Classic",
+            "price": "à partir de 2 500 DA"
+          },
+          {
+            "name": "Rubber base",
+            "price": "à partir de 2 500 DA"
+          },
+          {
+            "name": "Gel sur ongle naturel",
+            "price": "à partir de 3 500 DA"
+          },
+          {
+            "name": "Pose américaine",
+            "price": "à partir de 3 500 DA"
+          },
+          {
+            "name": "Pose capsule gel",
+            "price": "à partir de 4 000 DA"
+          },
+          {
+            "name": "Extension gel sur chablon",
+            "price": "à partir de 5 000 DA"
+          },
+          {
+            "name": "Pop It gel",
+            "price": "à partir de 4 000 DA"
+          },
+          {
+            "name": "Acrylique sur ongle naturel",
+            "price": "à partir de 3 000 DA"
+          },
+          {
+            "name": "Pose capsule acrylique",
+            "price": "à partir de 4 000 DA"
+          },
+          {
+            "name": "Press on nails",
+            "price": "à partir de 1 500 DA"
+          },
+          {
+            "name": "Soin manicure",
+            "price": "4 000 DA"
+          }
+        ]
+      },
+      {
+        "title": "Pédicure",
+        "items": [
+          {
+            "name": "VSP Classic",
+            "price": "à partir de 2 000 DA"
+          },
+          {
+            "name": "Rubber base",
+            "price": "à partir de 2 500 DA"
+          },
+          {
+            "name": "Gel sur ongle naturel",
+            "price": "à partir de 3 000 DA"
+          },
+          {
+            "name": "Extension polygel / capsule",
+            "price": "suppl. +500 DA gros orteil · +1 000 DA tous les orteils"
+          },
+          {
+            "name": "Soin pédicure Basic",
+            "price": "4 000 DA"
+          },
+          {
+            "name": "… avec paraffine",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Soin pédicure russe (peeling)",
+            "price": "8 000 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cils-sourcils",
+    "title": "Cils &amp; sourcils",
+    "description": "Extensions, rehaussement et mise en beauté du regard.",
+    "subsections": [
+      {
+        "title": null,
+        "items": [
+          {
+            "name": "Rehaussement de cils",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Coloration de cils",
+            "price": "500 DA"
+          },
+          {
+            "name": "Extension bouquet russe",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Extension cil à cil naturel",
+            "price": "4 500 DA"
+          },
+          {
+            "name": "Extension cil à cil eyeliner",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Extension cil à cil mixte",
+            "price": "5 500 DA"
+          },
+          {
+            "name": "Extension cil à cil russe",
+            "price": "6 500 DA"
+          },
+          {
+            "name": "Extension cil à cil wispy",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Brow lift",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Coloration sourcils",
+            "price": "1 500 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "epilation",
+    "title": "Épilation",
+    "description": "Au fil ou à la cire — tarifs par zone.",
+    "subsections": [
+      {
+        "title": "Au fil",
+        "items": [
+          {
+            "name": "Sourcils",
+            "price": "600 DA"
+          },
+          {
+            "name": "Moustache",
+            "price": "300 DA"
+          },
+          {
+            "name": "Visage complet",
+            "price": "1 500 DA"
+          }
+        ]
+      },
+      {
+        "title": "À la cire",
+        "items": [
+          {
+            "name": "Visage complet",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Sourcils — création de forme",
+            "price": "1 000 DA"
+          },
+          {
+            "name": "Sourcils — entretien (repousse)",
+            "price": "600 DA"
+          },
+          {
+            "name": "Moustache",
+            "price": "400 DA"
+          },
+          {
+            "name": "Corps complet",
+            "price": "14 500 DA"
+          },
+          {
+            "name": "Jambes complètes",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Demi-jambes",
+            "price": "2 500 DA"
+          },
+          {
+            "name": "Bras complets",
+            "price": "2 500 DA"
+          },
+          {
+            "name": "Demi-bras",
+            "price": "2 000 DA"
+          },
+          {
+            "name": "Aisselles",
+            "price": "1 500 DA"
+          },
+          {
+            "name": "Maillot classique",
+            "price": "2 000 DA"
+          },
+          {
+            "name": "Maillot intégral",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Ventre",
+            "price": "à partir de 1 500 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "maquillage",
+    "title": "Maquillage",
+    "description": "Looks jour, invitée et shooting.",
+    "subsections": [
+      {
+        "title": null,
+        "items": [
+          {
+            "name": "Maquillage de jour",
+            "price": "1 500 DA"
+          },
+          {
+            "name": "Maquillage invitée (produits locaux)",
+            "price": "1 500 DA"
+          },
+          {
+            "name": "Maquillage invitée (import)",
+            "price": "3 000 DA"
+          },
+          {
+            "name": "Maquillage invitée (import haute qualité)",
+            "price": "8 000 DA"
+          },
+          {
+            "name": "Maquillage shooting",
+            "price": "sur devis"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "salon-enfants",
+    "title": "Salon enfants",
+    "description": "Formules adaptées aux plus jeunes.",
+    "subsections": [
+      {
+        "title": null,
+        "items": [
+          {
+            "name": "Lavage",
+            "price": "300 DA"
+          },
+          {
+            "name": "Brushing",
+            "price": "à partir de 300 DA"
+          },
+          {
+            "name": "Coupe",
+            "price": "500 DA"
+          },
+          {
+            "name": "Ondulé",
+            "price": "à partir de 800 DA"
+          },
+          {
+            "name": "Maquillage",
+            "price": "400 DA"
+          },
+          {
+            "name": "Soin du visage",
+            "price": "2 500 DA"
+          },
+          {
+            "name": "Soin des pieds",
+            "price": "1 900 DA"
+          },
+          {
+            "name": "Vernis",
+            "price": "200 DA"
+          },
+          {
+            "name": "Massage (20 min)",
+            "price": "1 200 DA"
+          },
+          {
+            "name": "Shooting",
+            "price": "4 000 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hammam",
+    "title": "Hammam",
+    "description": "Rituels vapeur, gommage et packages VIP.",
+    "subsections": [
+      {
+        "title": null,
+        "items": [
+          {
+            "name": "Hammam simple",
+            "price": "1 000 DA"
+          },
+          {
+            "name": "Kassa — corps complet",
+            "price": "1 000 DA"
+          },
+          {
+            "name": "Kassa — demi",
+            "price": "500 DA"
+          },
+          {
+            "name": "Massage",
+            "price": "1 500 DA"
+          },
+          {
+            "name": "Hammam VIP",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Hammam Royal",
+            "price": "12 000 DA"
+          },
+          {
+            "name": "Hammam mariée (bride)",
+            "price": "15 000 DA"
+          },
+          {
+            "name": "Gaâda",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Gaâda henné",
+            "price": "7 000 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "aquatique",
+    "title": "Espace aquatique",
+    "description": "Piscine, jacuzzi et cours aquatiques.",
+    "subsections": [
+      {
+        "title": "Piscine",
+        "items": [
+          {
+            "name": "Enfant",
+            "price": "500 DA"
+          },
+          {
+            "name": "Enfant avec coach",
+            "price": "900 DA"
+          },
+          {
+            "name": "Adulte",
+            "price": "1 000 DA"
+          },
+          {
+            "name": "Adulte avec coach",
+            "price": "2 000 DA"
+          }
+        ]
+      },
+      {
+        "title": "Jacuzzi",
+        "items": [
+          {
+            "name": "Adultes",
+            "price": "1 500 DA"
+          }
+        ]
+      },
+      {
+        "title": "Activités aquatiques",
+        "items": [
+          {
+            "name": "Aqua Zumba",
+            "price": "500 DA / séance (abonnement sur demande)"
+          },
+          {
+            "name": "Aquagym",
+            "price": "900 DA / séance · 6 500 DA abonnement"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sport",
+    "title": "Salle de sport",
+    "description": "Cours collectifs et packs séances.",
+    "subsections": [
+      {
+        "title": null,
+        "items": [
+          {
+            "name": "AQ8",
+            "price": "2 000 DA · pack 8 séances 14 000 DA"
+          },
+          {
+            "name": "Yoga",
+            "price": "1 000 DA la séance · 5 000 DA VIP"
+          },
+          {
+            "name": "Zumba",
+            "price": "800 DA · abonnement 5 400 DA"
+          },
+          {
+            "name": "Body karaté",
+            "price": "800 DA · abonnement 5 400 DA"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "massages",
+    "title": "Massages",
+    "description": "Bien-être, minceur et protocoles signature.",
+    "subsections": [
+      {
+        "title": null,
+        "items": [
+          {
+            "name": "Réflexologie plantaire (30 min)",
+            "price": "3 500 DA"
+          },
+          {
+            "name": "Anti-stress (45 min)",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Relaxation (45 min)",
+            "price": "6 000 DA"
+          },
+          {
+            "name": "Aux pierres chaudes — thérapeutique (45 min)",
+            "price": "6 500 DA"
+          },
+          {
+            "name": "Massage minceur",
+            "price": "abonnement 8 séances 48 000 DA"
+          },
+          {
+            "name": "Décongestionnant (45 min)",
+            "price": "5 000 DA"
+          },
+          {
+            "name": "Raffermissant",
+            "price": "abonnement 6 séances 45 000 DA"
+          },
+          {
+            "name": "Thaïlandais / herbal",
+            "price": "sur devis"
+          },
+          {
+            "name": "Enveloppement aux algues",
+            "price": "9 000 DA · abonnement 6 séances 50 000 DA"
+          },
+          {
+            "name": "Lifting",
+            "price": "5 500 DA"
+          },
+          {
+            "name": "Asian Head Spa",
+            "price": "4 500 DA"
+          },
+          {
+            "name": "Thérapeutique — séance",
+            "price": "6 500 DA"
+          },
+          {
+            "name": "Thérapeutique — dos uniquement",
+            "price": "3 000 DA"
+          },
+          {
+            "name": "Drainage",
+            "price": "8 000 DA la séance"
+          },
+          {
+            "name": "Madérothérapie — corps complet",
+            "price": "9 000 DA · abonnement 8 séances 56 000 DA"
+          },
+          {
+            "name": "Madérothérapie — demi-corps",
+            "price": "28 000 DA (abonnement)"
+          }
+        ]
+      }
+    ]
+  }
+]

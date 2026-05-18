@@ -1,0 +1,201 @@
+/* GSAP ScrollTrigger pin + Lenis — layout only; motion via useHeroScrollTrigger */
+
+.hero-reveal-stack {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-reveal-stack__pin {
+  position: relative;
+  height: 100svh;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-reveal-stack__backdrop {
+  position: absolute;
+  inset: -10%;
+  z-index: 1;
+  overflow: hidden;
+  background: linear-gradient(165deg, #fdf8fa 0%, #f3e4ec 45%, #e8d4e0 100%);
+}
+
+.hero-reveal-stack__backdrop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.1);
+  filter: blur(22px) saturate(1.12) brightness(1.04);
+  opacity: 0.9;
+  will-change: transform;
+}
+
+.hero-reveal-stack__card {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  transform-origin: 50% 38%;
+  border-radius: 0;
+  will-change: transform, opacity, border-radius;
+}
+
+.hero-reveal-stack__card .hero-ads {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  border-radius: inherit;
+}
+
+.brand-welcome--sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: clamp(2rem, 6vw, 3rem) 1.25rem !important;
+  background: var(--c-white);
+  border-bottom: none;
+  will-change: transform;
+}
+
+/* Nav during hero transition */
+body.is-home-hero.is-hero-collapsing .nav-shell,
+body.is-home-hero.nav-shell--revealed .nav-shell {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+body.is-home-hero.is-hero-collapsing .contact-rail,
+body.is-home-hero.nav-shell--revealed .contact-rail {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.is-hero-collapsed .hero-reveal-stack__card {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+body.is-hero-collapsing .hero-reveal-stack .hero-ads__nav,
+body.is-hero-collapsing .hero-reveal-stack .hero-ads__pagination {
+  pointer-events: none;
+}
+
+/* Mobile / short — natural scroll (no viewport pin trap) */
+.hero-reveal-stack--scrub,
+.hero-reveal-stack--scrub .hero-reveal-stack__pin {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.hero-reveal-stack--scrub .hero-reveal-stack__card {
+  position: relative;
+  inset: auto;
+  height: 100svh;
+  height: 100dvh;
+  min-height: 100dvh;
+  max-height: 100dvh;
+}
+
+.hero-reveal-stack--scrub .brand-welcome--sheet {
+  position: relative;
+  inset: auto;
+  min-height: 0;
+  padding-top: clamp(2rem, 6vw, 3rem) !important;
+  padding-bottom: clamp(2.5rem, 8vw, 4rem) !important;
+}
+
+body.is-hero-collapsed .hero-reveal-stack--scrub .hero-reveal-stack__card {
+  visibility: hidden;
+  pointer-events: none;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden;
+}
+
+/* Welcome CTA — same pill as hero ads, inverted for white sheet */
+.brand-welcome__cta-pill.hero-ads__cta-pill {
+  margin-top: clamp(1.35rem, 3.5vw, 2.1rem);
+  cursor: pointer;
+  font-family: inherit;
+  border-color: rgba(26, 20, 22, 0.82);
+  color: var(--c-ink);
+}
+
+.brand-welcome__cta-pill.hero-ads__cta-pill:hover {
+  background: var(--c-ink);
+  color: var(--c-white);
+  border-color: var(--c-ink);
+}
+
+.brand-welcome__cta-pill.hero-ads__cta-pill:focus-visible {
+  outline: 2px solid var(--c-pink-deep);
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .hero-reveal-stack__backdrop-img {
+    filter: blur(18px) saturate(1.08);
+  }
+
+  .brand-welcome--sheet {
+    padding: 1.5rem 1.25rem !important;
+    align-items: center;
+  }
+
+  .brand-welcome__display {
+    font-size: clamp(1.85rem, 7vw, 2.5rem);
+  }
+
+  .brand-welcome__tag {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    letter-spacing: 0.2em;
+  }
+
+  .brand-welcome__lede {
+    font-size: 0.9rem;
+  }
+
+  .brand-welcome__cta-pill.hero-ads__cta-pill {
+    margin-top: 1.15rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.58rem;
+  }
+
+  .services-reveal-stack {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal-stack__pin {
+    height: auto;
+    min-height: 0;
+  }
+
+  .hero-reveal-stack__backdrop {
+    display: none;
+  }
+
+  .hero-reveal-stack__card {
+    position: relative;
+    height: auto;
+    visibility: visible;
+  }
+
+  .brand-welcome--sheet {
+    position: relative;
+  }
+}

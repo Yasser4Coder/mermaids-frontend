@@ -1,0 +1,211 @@
+/* Landing page — cross-section responsive polish (imported last) */
+
+main.home-landing {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Shared wrap + section rhythm */
+@media (max-width: 960px) {
+  main.home-landing .wrap {
+    width: min(100%, 100vw - 2rem);
+    padding-inline: clamp(1rem, 4vw, 1.35rem);
+  }
+
+  main.home-landing .section {
+    scroll-margin-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 8px);
+  }
+}
+
+@media (max-width: 768px) {
+  main.home-landing {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* —— Clinic —— */
+  .clinic-reveal-stack--scrub .clinic-reveal-stack__pin,
+  .clinic-reveal-stack--scrub .clinic-suite--editorial {
+    padding-inline: 0;
+  }
+
+  .clinic-suite--editorial .clinic-suite__shell {
+    padding-inline: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .clinic-suite__cards {
+    gap: 0.75rem;
+  }
+
+  a.clinic-suite__card {
+    min-height: 0;
+  }
+
+  /* —— Products / Explore —— */
+  .products-reveal-stack__card .experience-compass__grid {
+    gap: 0.55rem;
+  }
+
+  .products-reveal-stack__card .experience-compass__card {
+    min-height: clamp(7.5rem, 22vw, 9.5rem);
+    padding: 0.85rem 0.65rem;
+  }
+
+  .products-reveal-stack__card .experience-compass__label {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+
+  .products-reveal-stack__card .experience-compass__hint {
+    display: none;
+  }
+
+  .featured-products--sheet .featured-products__inner {
+    padding-inline: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .featured-products__mosaic {
+    gap: 0.85rem;
+  }
+
+  .editorial-product-card__title {
+    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+  }
+
+  /* —— Simple booking —— */
+  .booking-steps-mini--photo {
+    min-height: auto;
+    padding: clamp(2.25rem, 7vw, 3.25rem) 0;
+  }
+
+  .booking-steps-mini--photo .booking-steps-mini__wrap {
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .booking-steps-mini--photo .section-head {
+    margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+    text-align: center;
+  }
+
+  .booking-steps-mini--photo .section-head .heading-serif {
+    font-size: clamp(1.45rem, 5.5vw, 1.85rem);
+    max-width: 16ch;
+    margin-inline: auto;
+  }
+
+  .booking-steps-mini--photo .timeline--three {
+    gap: 0.75rem;
+    max-width: 26rem;
+    margin-inline: auto;
+  }
+
+  .booking-steps-mini--photo .timeline__step {
+    padding: 1rem 1.1rem;
+  }
+
+  .booking-steps-mini--photo .timeline__num {
+    font-size: 1.65rem;
+  }
+
+  .booking-steps-mini--photo .timeline__title {
+    font-size: 1rem;
+  }
+
+  .booking-steps-mini--photo .timeline__body p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  /* —— Book now CTA —— */
+  .cta-appointments.home-section-reveal {
+    padding-block: clamp(2.75rem, 8vw, 4rem);
+  }
+
+  .cta-appointments__wrap {
+    padding-inline: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .cta-appointments__grid {
+    gap: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .cta-appointments__watermark {
+    display: none;
+  }
+
+  .cta-appointments__lede {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .cta-appointments__chips {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .cta-appointments__chips li {
+    font-size: 0.72rem;
+    padding: 0.45rem 0.65rem;
+  }
+
+  .cta-appointments__ticket {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .cta-appointments__btn {
+    min-height: 48px;
+  }
+
+  /* —— Spa strips (legacy) —— */
+  main.home-landing .spa-wellness__strip {
+    scroll-margin-top: calc(var(--header-h) + 8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .mermaid-collection__showcase {
+    gap: 0.45rem;
+  }
+
+  .products-reveal-stack__card .experience-compass__title {
+    font-size: clamp(1.25rem, 5vw, 1.45rem);
+    margin-bottom: 1rem;
+  }
+
+  .featured-products__eyebrow,
+  .featured-products__view-all {
+    font-size: 0.58rem;
+  }
+
+  .cta-appointments__ticket-title {
+    font-size: 1.45rem;
+  }
+
+  .cta-appointments__ticket-note {
+    font-size: 0.86rem;
+  }
+}
+
+/* Short phones — reduce vertical traps */
+@media (max-width: 768px) and (max-height: 700px) {
+  .hero-reveal-stack--scrub .hero-reveal-stack__card {
+    min-height: 100svh;
+    height: 100svh;
+  }
+
+  .hero-reveal-stack--scrub .brand-welcome--sheet {
+    min-height: auto;
+    padding-top: 1.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .booking-steps-mini--photo {
+    padding: 1.75rem 0;
+  }
+
+  .services-reveal-stack--scrub .services-reveal-stack__pin {
+    padding-top: calc(var(--header-h) + 0.5rem);
+  }
+}
