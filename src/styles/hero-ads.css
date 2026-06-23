@@ -39,6 +39,10 @@
   object-position: center 20%;
 }
 
+.hero-ads__bg--mobile {
+  display: none;
+}
+
 .hero-ads__veil {
   position: absolute;
   inset: 0;
@@ -68,7 +72,8 @@
     "footer brand";
   width: 100%;
   height: 100%;
-  padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3.5rem) clamp(2rem, 5vw, 3.5rem);
+  padding: calc(var(--header-h) + env(safe-area-inset-top, 0px) + clamp(0.85rem, 2.5vw, 1.35rem))
+    clamp(1.25rem, 4vw, 3.5rem) clamp(2rem, 5vw, 3.5rem);
   box-sizing: border-box;
   color: var(--c-white);
 }
@@ -291,8 +296,14 @@ body.is-home-hero.nav-shell--revealed .hero-ads__scroll-cue {
     max-height: 100dvh;
   }
 
-  .hero-ads__bg {
-    object-position: center 22%;
+  .hero-ads__bg--desktop {
+    display: none;
+  }
+
+  .hero-ads__bg--mobile {
+    display: block;
+    object-fit: cover;
+    object-position: center center;
   }
 
   .hero-ads__veil {
@@ -311,12 +322,12 @@ body.is-home-hero.nav-shell--revealed .hero-ads__scroll-cue {
   .hero-ads__layout {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 100%;
     min-height: 100%;
-    padding: max(1rem, env(safe-area-inset-top, 0px)) 1.25rem
-      calc(4.5rem + env(safe-area-inset-bottom, 0px));
-    gap: 0.75rem;
+    padding: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 0.85rem) 1.25rem
+      calc(3.5rem + env(safe-area-inset-bottom, 0px));
+    gap: 0;
   }
 
   .hero-ads__headline-block {
@@ -342,34 +353,10 @@ body.is-home-hero.nav-shell--revealed .hero-ads__scroll-cue {
     letter-spacing: 0.16em;
   }
 
-  .hero-ads__rail {
-    flex: 0 0 auto;
-    max-width: 100%;
-    margin: 0;
-    text-align: left;
-    font-size: 0.58rem;
-    letter-spacing: 0.14em;
-    line-height: 1.5;
-    opacity: 0.9;
-  }
-
-  .hero-ads__footer-copy {
-    flex: 0 0 auto;
-    margin: 0;
-    max-width: 100%;
-    font-size: 0.8rem;
-    line-height: 1.55;
-  }
-
+  .hero-ads__rail,
+  .hero-ads__footer-copy,
   .hero-ads__brand {
-    flex: 0 0 auto;
-    align-self: center;
-    width: 100%;
-    margin: 0;
-    font-size: clamp(2.25rem, 14vw, 3.25rem);
-    line-height: 0.9;
-    text-align: center;
-    opacity: 0.9;
+    display: none;
   }
 
   .hero-ads__nav {
@@ -397,8 +384,7 @@ body.is-home-hero.nav-shell--revealed .hero-ads__scroll-cue {
 @media (max-width: 480px) {
   .hero-ads__layout {
     padding-inline: 1rem;
-    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px));
-    gap: 0.5rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
   }
 
   .hero-ads__headline {
@@ -410,18 +396,6 @@ body.is-home-hero.nav-shell--revealed .hero-ads__scroll-cue {
     margin-top: 0.85rem;
     padding: 0.65rem 1.1rem;
     font-size: 0.58rem;
-  }
-
-  .hero-ads__rail {
-    font-size: 0.55rem;
-  }
-
-  .hero-ads__footer-copy {
-    font-size: 0.75rem;
-  }
-
-  .hero-ads__brand {
-    font-size: clamp(1.85rem, 12vw, 2.5rem);
   }
 
   .hero-ads__scroll-cue {

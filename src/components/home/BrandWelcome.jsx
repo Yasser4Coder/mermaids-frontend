@@ -1,56 +1,123 @@
-import { forwardRef } from "react";
-import { getLenis } from "../../lib/smoothScroll";
-import { Wrap } from "../ui/Wrap";
+import { useCallback, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { PRODUCTS } from "../../data/products";
+import { formatPriceAmount } from "../../lib/formatPrice";
+import { SectionIntro } from "../ui/SectionIntro";
 
-function scrollToNextSection() {
-  const target = document.getElementById("services-preview");
-  if (!target) return;
+const SHOWCASE = PRODUCTS.slice(0, 6);
 
-  const lenis = getLenis();
-  if (lenis) {
-    lenis.scrollTo(target, { offset: -(88 + 16) });
-    return;
-  }
+export function BrandWelcome() {
+  const swiperRef = useRef(null);
+  const [progress, setProgress] = useState(1 / SHOWCASE.length);
 
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+  const updateProgress = useCallback((swiper) => {
+    setProgress((swiper.realIndex + 1) / SHOWCASE.length);
+  }, []);
 
-export const BrandWelcome = forwardRef(function BrandWelcome({ sheet = false }, ref) {
+  const goPrev = () => swiperRef.current?.slidePrev();
+  const goNext = () => swiperRef.current?.slideNext();
+
   return (
-    <section
-      ref={ref}
-      className={`brand-welcome${sheet ? " brand-welcome--sheet" : ""}`}
-      aria-labelledby="brand-welcome-heading"
-    >
-      <div className="brand-welcome__sparkles" aria-hidden="true">
-        <span className="brand-welcome__spark brand-welcome__spark--1" />
-        <span className="brand-welcome__spark brand-welcome__spark--2" />
-        <span className="brand-welcome__spark brand-welcome__spark--3" />
-        <span className="brand-welcome__spark brand-welcome__spark--4" />
-        <span className="brand-welcome__spark brand-welcome__spark--5" />
-        <span className="brand-welcome__spark brand-welcome__spark--6" />
-      </div>
+    <section className="welcome-showcase" id="welcome" aria-labelledby="welcome-showcase-heading">
+      <div className="wrap welcome-showcase__wrap">
+        <SectionIntro
+          badge="Mermaids beauty welcomes you"
+          title="Mermaids beauty"
+          titleId="welcome-showcase-heading"
+          lede="From hair to glowing skin and spa luxury, we are your destination for beauty and radiance. Discover Mamirka favourites — salon-finish formulas for your home ritual."
+        />
 
-      <Wrap className="brand-welcome__inner">
-        <p className="brand-welcome__eyebrow brand-welcome__line brand-welcome__line--eyebrow">
-          Mermaids beauty welcomes you
-        </p>
-        <h2 id="brand-welcome-heading" className="brand-welcome__display brand-welcome__line brand-welcome__line--title">
-          Mermaids
-        </h2>
-        <p className="brand-welcome__tag brand-welcome__line brand-welcome__line--tag">beauty</p>
-        <p className="brand-welcome__lede brand-welcome__line brand-welcome__line--lede">
-          From hair to glowing skin and spa luxury, we are your destination for beauty and radiance. We look forward to
-          an unforgettable experience — start your journey with us today.
-        </p>
-        <button
-          type="button"
-          className="hero-ads__cta-pill brand-welcome__cta-pill brand-welcome__line brand-welcome__line--cta"
-          onClick={scrollToNextSection}
-        >
-          Scroll to see more
-        </button>
-      </Wrap>
+        <div className="welcome-showcase__slider">
+          <Swiper
+            slidesPerView={1}
+            slidesPerGroup={1}
+            spaceBetween={16}
+            speed={650}
+            loop
+            breakpoints={{
+              640: { slidesPerView: 1.15, spaceBetween: 20 },
+              768: { slidesPerView: 2, spaceBetween: 22 },
+              1100: { slidesPerView: 3, spaceBetween: 24 },
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              updateProgress(swiper);
+            }}
+            onSlideChange={updateProgress}
+            className="welcome-showcase__swiper"
+          >
+            {SHOWCASE.map((product) => (
+              <SwiperSlide key={product.id}>
+                <article className="welcome-showcase__card">
+                  <Link
+                    to={`/shop/${product.slug}`}
+                    className="welcome-showcase__media"
+                    aria-label={`View ${product.name}`}
+                  >
+                    <img src={product.image} alt="" loading="lazy" decoding="async" />
+                  </Link>
+
+                  <div className="welcome-showcase__body">
+                    <p className="welcome-showcase__label">{product.categoryLabel}</p>
+                    <h3 className="welcome-showcase__name">
+                      <Link to={`/shop/${product.slug}`}>{product.name}</Link>
+                    </h3>
+                    <p className="welcome-showcase__text">{product.description}</p>
+
+                    <div className="welcome-showcase__foot">
+                      <p className="welcome-showcase__price">
+                        {formatPriceAmount(product.price)} <abbr title="Algerian dinar">DZD</abbr>
+                      </p>
+                      <Link to={`/shop/${product.slug}`} className="welcome-showcase__cta">
+                        <span className="welcome-showcase__cta-label">Explore our world</span>
+                        <span className="welcome-showcase__cta-arrow" aria-hidden="true">
+                          <i className="fa-solid fa-arrow-right" />
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <div className="welcome-showcase__controls">
+            <div
+              className="welcome-showcase__progress"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(progress * 100)}
+              aria-label="Welcome showcase progress"
+            >
+              <span
+                className="welcome-showcase__progress-fill"
+                style={{ transform: `scaleX(${progress})` }}
+              />
+            </div>
+
+            <div className="welcome-showcase__nav">
+              <button
+                type="button"
+                className="welcome-showcase__arrow welcome-showcase__arrow--prev"
+                aria-label="Previous product"
+                onClick={goPrev}
+              >
+                <i className="fa-solid fa-arrow-left" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                className="welcome-showcase__arrow welcome-showcase__arrow--next"
+                aria-label="Next product"
+                onClick={goNext}
+              >
+                <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
-});
+}

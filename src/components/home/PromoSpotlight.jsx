@@ -31,7 +31,7 @@ export function PromoSpotlight() {
         {PROMO_SLIDES.map((slide) => (
           <SwiperSlide key={slide.id} className="hero-ads__slide">
             <img
-              className="hero-ads__bg"
+              className="hero-ads__bg hero-ads__bg--desktop"
               src={slide.image}
               alt=""
               width={1920}
@@ -40,6 +40,19 @@ export function PromoSpotlight() {
               decoding="async"
               fetchPriority={slide.eager ? "high" : undefined}
               style={slide.imagePosition ? { objectPosition: slide.imagePosition } : undefined}
+            />
+            <img
+              className="hero-ads__bg hero-ads__bg--mobile"
+              src={slide.imageMobile ?? slide.image}
+              alt=""
+              width={1080}
+              height={1920}
+              loading={slide.eager ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={slide.eager ? "high" : undefined}
+              style={{
+                objectPosition: slide.imageMobilePosition ?? slide.imagePosition ?? "center center",
+              }}
             />
             <div className="hero-ads__veil" aria-hidden="true" />
             <div className="hero-ads__grain" aria-hidden="true" />
@@ -73,11 +86,6 @@ export function PromoSpotlight() {
         </button>
         <div className="swiper-pagination hero-ads__pagination" />
       </Swiper>
-
-      <div className="hero-ads__scroll-cue" aria-hidden="true">
-        <span>Scroll</span>
-        <i className="fa-solid fa-chevron-down" />
-      </div>
     </section>
   );
 }

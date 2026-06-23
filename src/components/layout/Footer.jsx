@@ -1,28 +1,21 @@
 import { Link } from "react-router-dom";
-import { BrandLockup } from "../ui/BrandLockup";
 import { SITE } from "../../lib/constants";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="site-footer">
-      <div className="wrap site-footer__grid">
-        <div className="site-footer__brand">
-          <BrandLockup footer />
-          <p className="site-footer__tag">
-            Mermaids beauty — salon, aesthetics and spa in Chlef. Mamirka Cosmétiques, your partner for a complete
-            experience.
+    <footer className="brand-footer site-footer">
+      <div className="wrap brand-footer__grid">
+        <div>
+          <h3 className="brand-footer__heading">Mermaids</h3>
+          <p className="brand-footer__copy">
+            Salon, aesthetics and spa in Chlef. Mamirka Cosmétiques — your partner for a complete beauty experience.
           </p>
-          <ul className="social-row" aria-label="Social media">
+          <ul className="brand-footer__social" aria-label="Social media">
             <li>
               <a href={`tel:+${SITE.phone}`} aria-label="Phone">
                 <i className="fa-solid fa-phone" aria-hidden="true" />
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="Facebook">
-                <i className="fab fa-facebook-f" aria-hidden="true" />
               </a>
             </li>
             <li>
@@ -31,8 +24,8 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" aria-label="Snapchat">
-                <i className="fab fa-snapchat" aria-hidden="true" />
+              <a href="#" aria-label="Facebook">
+                <i className="fab fa-facebook-f" aria-hidden="true" />
               </a>
             </li>
             <li>
@@ -43,55 +36,50 @@ export function Footer() {
           </ul>
         </div>
 
-        <div className="site-footer__news">
-          <h3 className="footer-heading">Offers &amp; openings</h3>
-          <p className="footer-copy">
-            Occasional notes on new services, bundles, and last-minute slots — never spam.
-          </p>
-          <form className="news-form" action="#" method="post" onSubmit={(e) => e.preventDefault()}>
+        <div>
+          <h3 className="brand-footer__heading">Explore</h3>
+          <nav className="brand-footer__links" aria-label="Footer navigation">
+            <Link to="/services">Services</Link>
+            <Link to="/shop">Shop</Link>
+            <Link to="/book">Book online</Link>
+            <Link to="/#how-it-works">How it works</Link>
+            <Link to="/#promos">Offers</Link>
+          </nav>
+        </div>
+
+        <div>
+          <h3 className="brand-footer__heading">Stay in touch</h3>
+          <p className="brand-footer__copy">Notes on new services, bundles and last-minute slots.</p>
+          <form className="brand-footer__news-form" action="#" method="post" onSubmit={(e) => e.preventDefault()}>
             <label className="sr-only" htmlFor="news-email">
               Email
             </label>
-            <input
-              id="news-email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              placeholder="Your email"
-              required
-              className="news-form__input"
-            />
-            <button type="submit" className="news-form__btn">
-              Join
-            </button>
+            <input id="news-email" name="email" type="email" autoComplete="email" placeholder="Your email" required />
+            <button type="submit">Sign up</button>
           </form>
-        </div>
-
-        <div className="site-footer__contact">
-          <h3 className="footer-heading">Visit &amp; contact</h3>
-          <address className="footer-address">
+          <address className="brand-footer__copy" style={{ marginTop: "1.25rem", fontStyle: "normal" }}>
             {SITE.address[0]}
             <br />
             {SITE.address[1]}
-          </address>
-          <p className="footer-lines">
-            <a href={`tel:+${SITE.phone}`}>{SITE.phoneDisplay}</a>
             <br />
-            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-          </p>
-          <p className="footer-quicklinks">
-            <Link to="/services">Services</Link> · <Link to="/book">Book</Link> · <Link to="/shop">Shop</Link> ·{" "}
-            <Link to="/account">Account</Link>
+            <a href={`tel:+${SITE.phone}`} style={{ color: "rgba(255,255,255,0.78)" }}>
+              {SITE.phoneDisplay}
+            </a>
+          </address>
+        </div>
+      </div>
+
+      <div className="wrap brand-footer__base">
+        <div className="brand-footer__base-inner">
+          <p>© {year} Mermaids. All rights reserved.</p>
+          <p>
+            <Link to="/account">Account</Link> · <a href="#">Privacy</a>
           </p>
         </div>
       </div>
-      <div className="site-footer__base">
-        <div className="wrap site-footer__base-inner">
-          <p>© {year} Mermaids. All rights reserved.</p>
-          <p className="footer-meta">
-            <Link to="/#how-it-works">How it works</Link> · <a href="#">Privacy</a> · <Link to="/#promos">Offers</Link>
-          </p>
-        </div>
+
+      <div className="brand-footer__mega" aria-hidden="true">
+        <p className="brand-footer__mega-word">Mermaids</p>
       </div>
     </footer>
   );

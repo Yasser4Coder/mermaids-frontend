@@ -13,9 +13,9 @@
 }
 
 .featured-products__inner {
-  width: min(100%, 1180px);
+  width: var(--wrap);
   margin-inline: auto;
-  padding-inline: clamp(1.15rem, 3.5vw, 2.25rem);
+  padding-inline: 0;
 }
 
 /* Header */

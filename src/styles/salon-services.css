@@ -54,9 +54,9 @@
 .mermaid-collection--showcase .mermaid-collection__wrap {
   position: relative;
   z-index: 1;
-  width: min(100%, 1280px);
+  width: var(--wrap);
   margin-inline: auto;
-  padding-inline: clamp(1rem, 3vw, 2rem);
+  padding-inline: 0;
 }
 
 .mermaid-collection--showcase .mermaid-collection__head {
