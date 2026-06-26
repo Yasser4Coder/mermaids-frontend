@@ -1,49 +1,16 @@
-# Mermaids Web
+# React + Vite
 
-React + Vite front end for **Mermaids Beauty Salon & Boutique** (Chlef, Algeria).
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Stack
+Currently, two official plugins are available:
 
-- React 19
-- Vite 8
-- Tailwind CSS v4 (`@tailwindcss/vite`)
-- React Router
-- Swiper (promo carousel)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Getting started
+## React Compiler
 
-```bash
-cd mermaids-web
-npm install
-npm run dev
-```
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Open the URL shown in the terminal (usually `http://localhost:5173`).
+## Expanding the Oxlint configuration
 
-## Scripts
-
-| Command        | Description              |
-| -------------- | ------------------------ |
-| `npm run dev`  | Start dev server with HMR |
-| `npm run build`| Production build to `dist/` |
-| `npm run preview` | Preview production build |
-
-After editing JSX, you can normalize accidental `motion` tags:
-
-```bash
-python scripts/fix-motion-tags.py
-```
-
-## Routes
-
-| Path | Page |
-| ---- | ---- |
-| `/` | Home |
-| `/services` | Full services menu |
-| `/book` | Booking wizard |
-| `/shop` | Boutique |
-| `/shop/:slug` | Product detail |
-| `/checkout` | Cart |
-| `/account` | Demo sign-in |
-
-Static assets live in `public/images/`.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.

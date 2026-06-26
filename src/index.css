@@ -1,25 +1,30 @@
-@import "lenis/dist/lenis.css";
-@import "./styles/legacy.css";
-@import "./styles/brand.css";
-@import "./styles/hero-ads.css";
-@import "./styles/hero-reveal.css";
-@import "./styles/welcome-showcase.css";
-@import "./styles/home-brand.css";
-@import "./styles/services-carousel.css";
-@import "./styles/boutique-promos.css";
-@import "./styles/shop-page.css";
-@import "./styles/services-page.css";
-@import "./styles/mobile-header.css";
-@import "./styles/responsive.css";
-@import "swiper/css";
-@import "swiper/css/effect-fade";
-@import "swiper/css/pagination";
+@import 'tailwindcss';
 
-.promo-ads-swiper .swiper-button-prev,
-.promo-ads-swiper .swiper-button-next {
-  color: var(--c-white);
+@theme {
+  --color-cream: #f5f2ed;
+  --color-cream-dark: #ebe6df;
+  --color-cream-box: #f3f0eb;
+  --color-charcoal: #5a5a5a;
+  --color-charcoal-dark: #3d3d3d;
+  --color-ink: #1a1a1a;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-logo: 'Cormorant SC', Georgia, serif;
+  --font-garamond: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --tracking-logo: 0.05em;
+  --tracking-header: 0.02em;
 }
 
-.promo-ads-swiper .swiper-pagination-bullet-active {
-  background: var(--c-gold);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-cream font-sans text-ink antialiased;
+  }
+
+  #root {
+    @apply min-h-svh;
+  }
 }

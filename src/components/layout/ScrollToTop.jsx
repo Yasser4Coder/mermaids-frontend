@@ -1,35 +1,42 @@
-import { useEffect, useState } from "react";
-import { getLenis, scrollTo } from "../../lib/smoothScroll";
+import { useEffect, useLayoutEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
-export function ScrollToTop() {
-  const [visible, setVisible] = useState(false);
+function scrollToTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  document.documentElement.scrollTop = 0
+  document.body.scrollTop = 0
+}
+
+export default function ScrollToTop() {
+  const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    const update = (y) => setVisible(y > 400);
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+  }, [])
 
-    const lenis = getLenis();
-    if (lenis) {
-      const onLenisScroll = ({ scroll }) => update(scroll);
-      update(lenis.scroll);
-      lenis.on("scroll", onLenisScroll);
-      return () => lenis.off("scroll", onLenisScroll);
+  useLayoutEffect(() => {
+    if (!hash) {
+      scrollToTop()
+      return
     }
 
-    const onScroll = () => update(window.scrollY);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const id = hash.replace('#', '')
 
-  return (
-    <button
-      type="button"
-      className={`to-top${visible ? " is-visible" : ""}`}
-      id="to-top"
-      aria-label="Back to top"
-      onClick={() => scrollTo(0)}
-    >
-      <i className="fa-solid fa-arrow-up" aria-hidden="true" />
-    </button>
-  );
+    const scrollToHash = () => {
+      const element = document.getElementById(id)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        scrollToTop()
+      }
+    }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(scrollToHash)
+    })
+  }, [pathname, hash])
+
+  return null
 }

@@ -1,137 +1,104 @@
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { useCart } from "../../context/CartContext";
-import { LangSwitcher } from "../ui/LangSwitcher";
+import { useCallback, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Container from '@/components/common/Container'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher'
+import SiteMenu from '@/components/layout/SiteMenu'
 
-function navHref(to, pathname) {
-  const hash = to.replace("/#", "#");
-  return pathname === "/" ? hash : `/${hash}`;
+function MenuIcon({ open }) {
+  if (open) {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  )
 }
 
-const NAV = [
-  { to: "/services", label: "Services" },
-  { to: "/shop", label: "Shop" },
-  { to: "/book", label: "Book" },
-  { to: "/#featured-products", label: "Boutique", hash: true },
-  { to: "/account", label: "Account" },
-];
+function UserIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+    </svg>
+  )
+}
 
-export function Header() {
-  const { pathname } = useLocation();
-  const { isAuthenticated } = useAuth();
-  const { itemCount } = useCart();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const isHome = pathname === "/";
-  const onHero = isHome && !scrolled;
+function BagIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+    </svg>
+  )
+}
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [pathname]);
+function HeaderIconLink({ to, label, children }) {
+  return (
+    <Link
+      to={to}
+      aria-label={label}
+      className="flex size-10 shrink-0 cursor-pointer items-center justify-center text-ink transition-opacity hover:opacity-70"
+    >
+      {children}
+    </Link>
+  )
+}
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    document.body.classList.toggle("nav-open", menuOpen);
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.classList.remove("nav-open");
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
-
-  const headerClass = [
-    "brand-header",
-    onHero ? "brand-header--hero" : "brand-header--solid",
-    scrolled && "is-scrolled",
-    menuOpen && "brand-header--menu-open",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  const drawer = (
-    <>
-      <button
-        type="button"
-        className={`brand-header__overlay${menuOpen ? " is-open" : ""}`}
-        aria-label="Close menu"
-        tabIndex={menuOpen ? 0 : -1}
-        onClick={() => setMenuOpen(false)}
-      />
-      <nav
-        className={`brand-header__drawer${menuOpen ? " is-open" : ""}`}
-        id="site-nav"
-        aria-label="Primary"
-        aria-hidden={!menuOpen}
-      >
-        <ul className="brand-header__nav-list">
-          {NAV.map((item) => (
-            <li key={item.label}>
-              {item.hash ? (
-                <a href={navHref(item.to, pathname)} onClick={() => setMenuOpen(false)}>
-                  {item.label}
-                </a>
-              ) : (
-                <NavLink to={item.to} onClick={() => setMenuOpen(false)}>
-                  {item.label}
-                </NavLink>
-              )}
-            </li>
-          ))}
-        </ul>
-        {!isAuthenticated && (
-          <Link
-            to="/account#sign-in"
-            className="brand-header__drawer-auth brand-btn brand-btn--gold"
-            onClick={() => setMenuOpen(false)}
-          >
-            Log in / Register
-          </Link>
-        )}
-      </nav>
-    </>
-  );
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   return (
     <>
-      <header className={headerClass}>
-        <div className="brand-header__bar wrap">
-          <div className="brand-header__side brand-header__side--left">
-            <button
-              type="button"
-              className="brand-header__burger"
-              aria-expanded={menuOpen}
-              aria-controls="site-nav"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              onClick={() => setMenuOpen((v) => !v)}
+      <header className="sticky top-0 z-50 h-14 shrink-0 border-b border-cream-dark bg-white font-logo sm:h-16">
+        <Container wide className="h-full px-3 sm:px-6">
+          <div className="grid h-full grid-cols-[auto_1fr_auto] items-center gap-2 sm:grid-cols-[1fr_auto_1fr] sm:gap-4">
+            <div className="flex justify-start">
+              <button
+                type="button"
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen((open) => !open)}
+                className="flex size-10 cursor-pointer items-center justify-center gap-2.5 text-ink transition-opacity hover:opacity-70 sm:size-auto sm:px-0"
+              >
+                <MenuIcon open={menuOpen} />
+                <span className="hidden text-sm leading-none tracking-header uppercase sm:inline">
+                  Menu
+                </span>
+              </button>
+            </div>
+
+            <Link
+              to="/"
+              className="justify-self-center truncate text-center text-lg leading-none font-bold tracking-logo text-ink transition-opacity hover:opacity-80 sm:text-2xl lg:text-3xl"
             >
-              <span />
-              <span />
-              <span />
-            </button>
-          </div>
-
-          <Link to="/" className="brand-header__logo" aria-label="Mermaids — home">
-            <span className="brand-header__wordmark">Mermaids</span>
-          </Link>
-
-          <div className="brand-header__side brand-header__side--right">
-            <Link to="/checkout" className="brand-header__icon" aria-label="Shopping cart">
-              <i className="fa-solid fa-bag-shopping" aria-hidden="true" />
-              {itemCount > 0 && <span className="brand-header__cart-count">{itemCount}</span>}
+              MERMAIDS
             </Link>
-            <LangSwitcher />
+
+            <div className="flex items-center justify-end gap-0.5 sm:gap-2">
+              <Link
+                to="/contact"
+                className="mr-1 hidden cursor-pointer text-sm leading-none tracking-header text-ink transition-opacity hover:opacity-70 lg:inline"
+              >
+                Contactez-nous
+              </Link>
+              <LanguageSwitcher className="hidden md:block" />
+              <HeaderIconLink to="/cart" label="Shopping bag">
+                <BagIcon />
+              </HeaderIconLink>
+              <HeaderIconLink to="/account" label="Account">
+                <UserIcon />
+              </HeaderIconLink>
+            </div>
           </div>
-        </div>
+        </Container>
       </header>
-      {createPortal(drawer, document.body)}
+
+      <SiteMenu isOpen={menuOpen} onClose={closeMenu} />
     </>
-  );
+  )
 }
