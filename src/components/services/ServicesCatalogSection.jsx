@@ -43,24 +43,29 @@ function getPopularItems(category) {
   return category.groups.flatMap((group) => group.items.filter((item) => item.popular))
 }
 
-function MobileGroupAccordion({ group, bookCategory }) {
-  const [open, setOpen] = useState(false)
+function MobileGroupAccordion({ group, bookCategory, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen)
 
   return (
-    <div className="border-b border-cream-dark">
+    <div className="overflow-hidden border border-cream-dark bg-white">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="flex w-full cursor-pointer items-center justify-between py-4 text-left font-garamond"
+        className="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-4 text-left font-garamond"
         aria-expanded={open}
       >
-        <span className="text-lg font-bold tracking-wide text-ink">{group.name}</span>
-        <span className="text-xl text-charcoal" aria-hidden="true">
-          {open ? '−' : '+'}
+        <span className="text-base font-bold tracking-wide text-ink">{group.name}</span>
+        <span
+          className={`flex size-8 shrink-0 items-center justify-center border border-cream-dark text-lg text-charcoal transition-transform ${
+            open ? 'rotate-180 bg-cream-box' : 'bg-white'
+          }`}
+          aria-hidden="true"
+        >
+          ↓
         </span>
       </button>
       {open && (
-        <div className="space-y-3 pb-5">
+        <div className="space-y-3 border-t border-cream-dark px-3 pb-4 pt-3">
           {group.items.map((item) => (
             <ServiceCatalogCard key={item.name} item={item} bookCategory={bookCategory} compact />
           ))}
@@ -74,20 +79,25 @@ function CategoryBlock({ category, bookCategory }) {
   const popularItems = getPopularItems(category)
 
   return (
-    <section id={`catalog-${category.id}`} className="scroll-mt-52 lg:scroll-mt-56">
+    <section id={`catalog-${category.id}`} className="scroll-mt-32 md:scroll-mt-52 lg:scroll-mt-56">
+      <WireframePlaceholder
+        label={category.label}
+        className="mb-6 aspect-[16/7] w-full md:aspect-[21/9] lg:hidden"
+      />
+
       <div className="grid gap-8 lg:grid-cols-[200px_1fr] lg:gap-10">
         <WireframePlaceholder label={category.label} className="hidden aspect-square lg:flex" />
 
         <div>
           <div className="font-garamond">
             <p className="text-xs uppercase tracking-[0.25em] text-charcoal">Category</p>
-            <h3 className="mt-2 text-3xl font-bold tracking-wide text-ink sm:text-4xl">
+            <h3 className="mt-2 text-2xl font-bold tracking-wide text-ink sm:text-3xl lg:text-4xl">
               {category.title}
             </h3>
             {bookCategory && (
               <Link
                 to={getBookingUrl(bookCategory)}
-                className="mt-4 inline-flex cursor-pointer items-center gap-2 border border-ink px-5 py-2 text-xs uppercase tracking-[0.15em] text-ink transition-colors hover:bg-ink hover:text-cream sm:text-sm"
+                className="mt-4 inline-flex w-full cursor-pointer items-center justify-center gap-2 border border-ink bg-ink px-5 py-3 text-xs uppercase tracking-[0.15em] text-cream transition-colors hover:bg-charcoal-dark sm:w-auto sm:bg-transparent sm:py-2 sm:text-ink sm:hover:bg-ink sm:hover:text-cream"
               >
                 Book in {category.label}
                 <span aria-hidden="true">→</span>
@@ -100,7 +110,7 @@ function CategoryBlock({ category, bookCategory }) {
               <p className="font-garamond text-sm uppercase tracking-[0.2em] text-charcoal">
                 ★ Most requested
               </p>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {popularItems.map((item) => (
                   <ServiceCatalogCard
                     key={`${category.id}-${item.name}`}
@@ -112,15 +122,19 @@ function CategoryBlock({ category, bookCategory }) {
             </div>
           )}
 
-          <div className="mt-10 space-y-2 lg:space-y-8">
-            {category.groups.map((group) => (
+          <div className="mt-8 space-y-3 lg:space-y-8">
+            {category.groups.map((group, index) => (
               <div key={group.name}>
                 <h4 className="hidden border-b border-cream-dark pb-3 font-garamond text-xl font-bold tracking-wide text-ink lg:block">
                   {group.name}
                 </h4>
 
                 <div className="lg:hidden">
-                  <MobileGroupAccordion group={group} bookCategory={bookCategory} />
+                  <MobileGroupAccordion
+                    group={group}
+                    bookCategory={bookCategory}
+                    defaultOpen={index === 0}
+                  />
                 </div>
 
                 <div className="mt-5 hidden gap-4 sm:grid-cols-2 lg:grid xl:grid-cols-3">
@@ -186,7 +200,7 @@ export default function ServicesCatalogSection({ catalog }) {
           setActiveCategory(visible.target.id.replace('catalog-', ''))
         }
       },
-      { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5] },
+      { rootMargin: '-35% 0px -55% 0px', threshold: [0, 0.25, 0.5] },
     )
 
     sections.forEach((section) => observer.observe(section))
@@ -203,9 +217,24 @@ export default function ServicesCatalogSection({ catalog }) {
     }
   }
 
+  function handleFilterSelect(optionId) {
+    if (optionId === 'all' || optionId === 'popular') {
+      setFilter(optionId)
+      return
+    }
+
+    const isCategory = categories.some((category) => category.id === optionId)
+    if (isCategory) {
+      scrollToCategory(optionId)
+      return
+    }
+
+    setFilter(optionId)
+  }
+
   return (
     <section id={sectionId} className="scroll-mt-24 border-t border-cream-dark bg-cream">
-      <div className="relative overflow-hidden border-b border-cream-dark bg-cream-box py-16 lg:py-24">
+      <div className="relative overflow-hidden border-b border-cream-dark bg-cream-box py-12 sm:py-16 lg:py-24">
         <WireframePlaceholder
           label={header.wireframeLabel ?? 'Services'}
           className="absolute inset-0 opacity-40"
@@ -213,16 +242,16 @@ export default function ServicesCatalogSection({ catalog }) {
         <div className="absolute inset-0 bg-cream-box/80" />
         <Container size="lg" className="relative">
           <div className="mx-auto max-w-3xl text-center font-garamond">
-            <p className="text-sm uppercase tracking-[0.25em] text-charcoal">
+            <p className="text-xs uppercase tracking-[0.25em] text-charcoal sm:text-sm">
               {header.eyebrow ?? 'Full Services Menu'}
             </p>
-            <h2 className="mt-4 text-4xl font-bold tracking-wide text-ink sm:text-5xl lg:text-6xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-wide text-ink sm:mt-4 sm:text-5xl lg:text-6xl">
               {header.title}
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-charcoal sm:text-lg">
+            <p className="mt-4 text-sm leading-relaxed text-charcoal sm:mt-5 sm:text-base lg:text-lg">
               {header.subtitle}
             </p>
-            <p className="mt-4 text-sm tracking-[0.15em] text-charcoal sm:text-base">
+            <p className="mt-3 text-xs tracking-[0.12em] text-charcoal sm:mt-4 sm:text-sm sm:tracking-[0.15em]">
               {header.tags.join('  •  ')}
             </p>
           </div>
@@ -230,9 +259,9 @@ export default function ServicesCatalogSection({ catalog }) {
       </div>
 
       <div className="sticky top-14 z-40 border-b border-cream-dark bg-white/95 backdrop-blur-sm sm:top-16">
-        <Container size="lg" className="space-y-4 py-4">
+        <Container size="lg" className="space-y-3 py-3 sm:space-y-4 sm:py-4">
           <div className="relative">
-            <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2">
+            <span className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 sm:left-4">
               <SearchIcon />
             </span>
             <input
@@ -241,35 +270,44 @@ export default function ServicesCatalogSection({ catalog }) {
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search service..."
               aria-label="Search services"
-              className="w-full border border-cream-dark bg-cream py-3 pr-4 pl-11 font-garamond text-base text-ink outline-none placeholder:text-charcoal/60 focus:border-ink"
+              className="w-full border border-cream-dark bg-cream py-2.5 pr-4 pl-10 font-garamond text-base text-ink outline-none placeholder:text-charcoal/60 focus:border-ink sm:py-3 sm:pl-11"
             />
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {filterOptions.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                onClick={() => setFilter(option.id)}
-                className={`cursor-pointer border px-4 py-2 font-garamond text-xs uppercase tracking-[0.15em] transition-colors sm:text-sm ${
-                  filter === option.id
-                    ? 'border-ink bg-ink text-cream'
-                    : 'border-cream-dark bg-white text-ink hover:border-ink'
-                }`}
-              >
-                {option.label}
-              </button>
-            ))}
+          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+            <div className="scrollbar-hide flex min-w-max snap-x snap-mandatory gap-2 pb-0.5">
+              {filterOptions.map((option) => {
+                const isAllOrPopular = option.id === 'all' || option.id === 'popular'
+                const isActive = isAllOrPopular
+                  ? filter === option.id
+                  : filter === option.id || (filter === 'all' && activeCategory === option.id)
+
+                return (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => handleFilterSelect(option.id)}
+                  className={`shrink-0 snap-start cursor-pointer border px-3.5 py-2 font-garamond text-xs uppercase tracking-[0.12em] transition-colors sm:px-4 sm:text-sm ${
+                    isActive
+                      ? 'border-ink bg-ink text-cream'
+                      : 'border-cream-dark bg-white text-ink hover:border-ink'
+                  }`}
+                >
+                  {option.label}
+                </button>
+                )
+              })}
+            </div>
           </div>
 
-          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-            <div className="flex min-w-max gap-2 pb-1">
+          <div className="hidden overflow-x-auto md:block">
+            <div className="scrollbar-hide flex min-w-max snap-x snap-mandatory gap-2 pb-1">
               {categories.map((category) => (
                 <button
                   key={category.id}
                   type="button"
                   onClick={() => scrollToCategory(category.id)}
-                  className={`cursor-pointer border px-5 py-2.5 font-garamond text-sm uppercase tracking-[0.12em] transition-colors ${
+                  className={`shrink-0 snap-start cursor-pointer border px-5 py-2.5 font-garamond text-sm uppercase tracking-[0.12em] transition-colors ${
                     activeCategory === category.id && filter === 'all'
                       ? 'border-ink bg-ink text-cream'
                       : 'border-cream-dark bg-cream-box text-ink hover:border-ink'
@@ -283,9 +321,9 @@ export default function ServicesCatalogSection({ catalog }) {
         </Container>
       </div>
 
-      <Container size="lg" className="py-12 lg:py-16">
+      <Container size="lg" className="py-10 sm:py-12 lg:py-16">
         {filteredCategories.length === 0 ? (
-          <p className="py-16 text-center font-garamond text-lg text-charcoal">
+          <p className="py-12 text-center font-garamond text-base text-charcoal sm:py-16 sm:text-lg">
             No services match your search. Try another keyword or filter.
           </p>
         ) : (
@@ -310,7 +348,7 @@ export default function ServicesCatalogSection({ catalog }) {
               </div>
             </aside>
 
-            <div className="space-y-16 lg:space-y-20">
+            <div className="space-y-12 sm:space-y-16 lg:space-y-20">
               {filteredCategories.map((category) => (
                 <CategoryBlock key={category.id} category={category} bookCategory={bookCategory} />
               ))}
@@ -319,14 +357,14 @@ export default function ServicesCatalogSection({ catalog }) {
         )}
       </Container>
 
-      <div className="border-t border-cream-dark bg-cream-box py-14 lg:py-16">
+      <div className="border-t border-cream-dark bg-cream-box py-12 sm:py-14 lg:py-16">
         <Container size="lg">
           <div className="mx-auto max-w-2xl text-center font-garamond">
-            <h3 className="text-3xl font-bold tracking-wide text-ink sm:text-4xl">{cta.title}</h3>
-            <p className="mt-4 text-base text-charcoal sm:text-lg">{cta.description}</p>
+            <h3 className="text-2xl font-bold tracking-wide text-ink sm:text-3xl lg:text-4xl">{cta.title}</h3>
+            <p className="mt-3 text-sm text-charcoal sm:mt-4 sm:text-base lg:text-lg">{cta.description}</p>
             <Link
               to={cta.href}
-              className="mt-8 inline-flex cursor-pointer items-center gap-2 border border-ink bg-ink px-10 py-3.5 text-sm uppercase tracking-[0.2em] text-cream transition-colors hover:bg-charcoal-dark"
+              className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 border border-ink bg-ink px-8 py-3.5 text-sm uppercase tracking-[0.2em] text-cream transition-colors hover:bg-charcoal-dark sm:mt-8 sm:w-auto sm:px-10"
             >
               {cta.label}
               <span aria-hidden="true">→</span>

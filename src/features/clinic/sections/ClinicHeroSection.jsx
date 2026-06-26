@@ -41,9 +41,12 @@ function ClinicFeaturesBar({ features }) {
   return (
     <div className="border-y border-cream-dark bg-cream-box">
       <Container size="lg">
-        <ul className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6 lg:py-12">
+        <ul className="scrollbar-hide -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 py-8 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:px-0 sm:py-10 lg:grid-cols-5 lg:gap-6 lg:py-12">
           {features.map((feature) => (
-            <li key={feature.id} className="group font-garamond">
+            <li
+              key={feature.id}
+              className="group min-w-[78vw] shrink-0 snap-center font-garamond sm:min-w-0 sm:snap-align-none"
+            >
               <div className="flex size-11 items-center justify-center rounded-full border border-cream-dark bg-white text-ink transition-colors group-hover:border-ink group-hover:bg-ink group-hover:text-cream">
                 {featureIcons[feature.id]}
               </div>
@@ -64,7 +67,7 @@ function ClinicFeaturesBar({ features }) {
 export default function ClinicHeroSection({ hero }) {
   return (
     <>
-      <section className="relative min-h-[28rem] overflow-hidden sm:min-h-[32rem] lg:min-h-[38rem]">
+      <section className="relative min-h-[22rem] overflow-hidden sm:min-h-[28rem] lg:min-h-[38rem]">
         <img
           src={hero.image}
           alt=""
@@ -75,10 +78,10 @@ export default function ClinicHeroSection({ hero }) {
 
         <Container
           size="lg"
-          className="relative flex min-h-[28rem] items-center py-14 sm:min-h-[32rem] sm:py-16 lg:min-h-[38rem] lg:py-20"
+          className="relative flex min-h-[22rem] items-end py-10 sm:min-h-[28rem] sm:items-center sm:py-16 lg:min-h-[38rem] lg:py-20"
         >
           <div className="max-w-2xl font-garamond">
-            <nav aria-label="Breadcrumb" className="text-sm uppercase tracking-[0.15em] text-white/70">
+            <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.15em] text-white/70 sm:text-sm">
               <Link to="/" className="transition-opacity hover:text-white">
                 Home
               </Link>
@@ -86,24 +89,24 @@ export default function ClinicHeroSection({ hero }) {
               <span className="text-white">Clinic</span>
             </nav>
 
-            <h1 className="mt-6 text-5xl font-bold tracking-wide text-white sm:text-6xl lg:text-7xl">
+            <h1 className="mt-4 text-3xl font-bold tracking-wide text-white sm:mt-6 sm:text-5xl lg:text-7xl">
               {hero.title}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg lg:text-xl">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/90 sm:mt-6 sm:text-base lg:text-xl">
               {hero.description}
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
               <Link
                 to={hero.primaryCta.href}
-                className="inline-flex cursor-pointer items-center gap-2 border border-white bg-white px-8 py-3 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-transparent hover:text-white sm:text-base"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 border border-white bg-white px-8 py-3.5 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-transparent hover:text-white sm:py-3 sm:text-base"
               >
                 {hero.primaryCta.label}
                 <span aria-hidden="true">→</span>
               </Link>
               <a
                 href={hero.secondaryCta.href}
-                className="inline-flex cursor-pointer items-center gap-2 border border-white px-8 py-3 font-garamond text-sm uppercase tracking-[0.15em] text-white transition-colors hover:bg-white hover:text-ink sm:text-base"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 border border-white px-8 py-3.5 font-garamond text-sm uppercase tracking-[0.15em] text-white transition-colors hover:bg-white hover:text-ink sm:py-3 sm:text-base"
               >
                 <PlayIcon />
                 {hero.secondaryCta.label}

@@ -2,7 +2,7 @@ import Container from '@/components/common/Container'
 
 export default function ClinicHowItWorksSection({ data }) {
   return (
-    <section id="how-it-works" className="scroll-mt-24 border-y border-cream-dark bg-cream-box py-20 lg:py-28">
+    <section id="how-it-works" className="scroll-mt-24 border-y border-cream-dark bg-cream-box py-12 sm:py-16 lg:py-28">
       <Container size="lg">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="font-garamond">

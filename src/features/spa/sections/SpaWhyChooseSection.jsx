@@ -30,15 +30,15 @@ export default function SpaWhyChooseSection({ data }) {
         />
       </div>
 
-      <div className="flex flex-col justify-center bg-black/60 px-8 py-14 sm:px-12 sm:py-16 lg:px-16 lg:py-20 xl:px-24">
-        <h2 className="font-garamond text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
+      <div className="flex flex-col justify-center bg-black/60 px-5 py-10 sm:px-12 sm:py-16 lg:px-16 lg:py-20 xl:px-24">
+        <h2 className="font-garamond text-3xl leading-tight text-white sm:text-5xl lg:text-6xl">
           {data.title}
         </h2>
-        <p className="mt-6 max-w-xl font-garamond text-base leading-loose text-white/85 sm:text-lg">
+        <p className="mt-4 max-w-xl font-garamond text-sm leading-relaxed text-white/85 sm:mt-6 sm:text-base lg:text-lg">
           {data.description}
         </p>
 
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2">
+        <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6">
           {data.features.map((feature) => (
             <li key={feature.title} className="flex items-start gap-3 font-garamond">
               <WhyChooseIcon />

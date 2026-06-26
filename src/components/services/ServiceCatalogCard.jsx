@@ -37,8 +37,8 @@ export default function ServiceCatalogCard({ item, bookCategory, compact = false
           to={getBookingUrl(bookCategory, item.name)}
           className={`inline-flex w-full cursor-pointer items-center justify-center gap-2 border border-ink bg-ink text-cream transition-colors hover:bg-charcoal-dark ${
             compact
-              ? 'mt-3 px-4 py-2 text-xs uppercase tracking-[0.15em]'
-              : 'mt-4 px-4 py-2.5 text-sm uppercase tracking-[0.15em]'
+              ? 'mt-3 px-4 py-2.5 text-xs uppercase tracking-[0.15em]'
+              : 'mt-4 px-4 py-3 text-sm uppercase tracking-[0.15em]'
           }`}
         >
           Book This

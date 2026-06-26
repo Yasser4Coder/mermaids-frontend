@@ -29,28 +29,30 @@ export default function ClinicTreatmentCard({ title, description, image, priceFr
 
 export function ClinicTreatmentsSection({ section, treatments }) {
   return (
-    <section id="treatments" className="scroll-mt-24 py-20 lg:py-28">
+    <section id="treatments" className="scroll-mt-24 py-12 sm:py-16 lg:py-28">
       <Container size="lg">
         <div className="mx-auto max-w-2xl text-center font-garamond">
-          <p className="text-sm uppercase tracking-[0.2em] text-charcoal">{section.eyebrow}</p>
-          <h2 className="mt-3 text-4xl font-bold tracking-wide text-ink sm:text-5xl lg:text-6xl">
+          <p className="text-xs uppercase tracking-[0.2em] text-charcoal sm:text-sm">{section.eyebrow}</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-wide text-ink sm:text-5xl lg:text-6xl">
             {section.title}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-charcoal sm:text-lg">
+          <p className="mt-3 text-sm leading-relaxed text-charcoal sm:mt-4 sm:text-base lg:text-lg">
             {section.subtitle}
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        <div className="scrollbar-hide -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:mt-14 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:px-0 lg:grid-cols-4 lg:gap-6">
           {treatments.map((treatment) => (
-            <ClinicTreatmentCard key={treatment.id} {...treatment} />
+            <div key={treatment.id} className="min-w-[78vw] shrink-0 snap-center sm:min-w-0 sm:snap-align-none">
+              <ClinicTreatmentCard {...treatment} />
+            </div>
           ))}
         </div>
 
-        <div className="mt-14 text-center">
+        <div className="mt-10 text-center sm:mt-14">
           <a
             href="#all-treatments"
-            className="inline-flex cursor-pointer items-center gap-2 border border-ink px-10 py-3 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-ink hover:text-cream sm:text-base"
+            className="inline-flex w-full cursor-pointer items-center justify-center gap-2 border border-ink px-8 py-3.5 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-ink hover:text-cream sm:w-auto sm:px-10 sm:py-3 sm:text-base"
           >
             View All Treatments
             <span aria-hidden="true">→</span>

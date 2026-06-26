@@ -22,9 +22,9 @@ function StatIcon() {
 
 export default function BeautyStatsSection({ stats }) {
   return (
-    <section className="border-y border-cream-dark bg-cream-box py-14 lg:py-16">
+    <section className="border-y border-cream-dark bg-cream-box py-10 sm:py-14 lg:py-16">
       <Container size="lg">
-        <ul className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-6">
+        <ul className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-6">
           {stats.map((stat) => (
             <li key={stat.label} className="text-center font-garamond">
               <StatIcon />

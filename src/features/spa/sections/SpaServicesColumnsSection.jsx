@@ -23,20 +23,23 @@ function ColumnIcon() {
 
 export default function SpaServicesColumnsSection({ section, columns }) {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="py-12 sm:py-16 lg:py-28">
       <Container size="lg">
         <div className="mx-auto max-w-2xl text-center font-garamond">
-          <h2 className="text-4xl font-bold tracking-wide text-ink sm:text-5xl lg:text-6xl">
+          <h2 className="text-3xl font-bold tracking-wide text-ink sm:text-5xl lg:text-6xl">
             {section.title}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-charcoal sm:text-lg">
+          <p className="mt-3 text-sm leading-relaxed text-charcoal sm:mt-4 sm:text-base lg:text-lg">
             {section.subtitle}
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+        <div className="scrollbar-hide -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:mt-14 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:px-0 lg:grid-cols-5 lg:gap-6">
           {columns.map((column) => (
-            <article key={column.id} className="font-garamond">
+            <article
+              key={column.id}
+              className="min-w-[78vw] shrink-0 snap-center font-garamond sm:min-w-0 sm:snap-align-none"
+            >
               <div className="flex items-center gap-2 border-b border-cream-dark pb-4">
                 <ColumnIcon />
                 <h3 className="text-base font-bold uppercase tracking-[0.08em] text-ink sm:text-lg">

@@ -24,7 +24,7 @@ function PackageIcon() {
 
 export default function SpaPackagesSection({ section, packages }) {
   return (
-    <section id="packages" className="scroll-mt-24 border-y border-cream-dark bg-cream-box py-20 lg:py-28">
+    <section id="packages" className="scroll-mt-24 border-y border-cream-dark bg-cream-box py-12 sm:py-16 lg:py-28">
       <Container size="lg">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="font-garamond">
@@ -35,27 +35,29 @@ export default function SpaPackagesSection({ section, packages }) {
               {section.subtitle}
             </p>
 
-            <ul className="mt-10 divide-y divide-cream-dark border-y border-cream-dark">
+            <ul className="mt-8 divide-y divide-cream-dark border-y border-cream-dark sm:mt-10">
               {packages.map((pkg) => (
                 <li
                   key={pkg.title}
-                  className="flex items-start gap-4 py-5 sm:gap-5 sm:py-6"
+                  className="flex flex-col gap-3 py-5 sm:flex-row sm:items-start sm:gap-5 sm:py-6"
                 >
-                  <PackageIcon />
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-lg font-bold text-ink sm:text-xl">{pkg.title}</h3>
-                    <p className="mt-1 text-sm text-charcoal sm:text-base">
-                      {pkg.includes.join(' · ')}
-                    </p>
+                  <div className="flex items-start gap-4 sm:flex-1">
+                    <PackageIcon />
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base font-bold text-ink sm:text-xl">{pkg.title}</h3>
+                      <p className="mt-1 text-sm text-charcoal sm:text-base">
+                        {pkg.includes.join(' · ')}
+                      </p>
+                    </div>
                   </div>
-                  <p className="shrink-0 text-base font-semibold text-ink sm:text-lg">{pkg.price}</p>
+                  <p className="shrink-0 pl-14 text-base font-semibold text-ink sm:pl-0 sm:text-lg">{pkg.price}</p>
                 </li>
               ))}
             </ul>
 
             <a
               href={section.cta.href}
-              className="mt-10 inline-flex cursor-pointer items-center gap-2 border border-ink px-10 py-3 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-ink hover:text-cream sm:text-base"
+              className="mt-8 inline-flex w-full cursor-pointer items-center justify-center gap-2 border border-ink px-8 py-3.5 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-ink hover:text-cream sm:mt-10 sm:w-auto sm:px-10 sm:py-3 sm:text-base"
             >
               {section.cta.label}
               <span aria-hidden="true">→</span>

@@ -1,3 +1,4 @@
+import spaPageHero from '@/assets/spa_page.png'
 import categorySpa from '@/assets/CategorySpa.png'
 import servicesImage from '@/assets/services.png'
 import gallery1 from '@/assets/gallery1.png'
@@ -10,7 +11,7 @@ import ctaBg from '@/assets/cta.png'
 
 export const spaPageData = {
   hero: {
-    image: categorySpa,
+    image: spaPageHero,
     title: 'Relax, Recharge & Rejuvenate',
     description:
       'Escape the everyday in our luxury spa sanctuary. From traditional hammam rituals to therapeutic massages and aquatic wellness, every experience is crafted to restore your body and calm your mind.',

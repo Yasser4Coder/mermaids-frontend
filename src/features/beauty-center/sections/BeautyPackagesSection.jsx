@@ -24,7 +24,7 @@ function GiftIcon() {
 
 export default function BeautyPackagesSection({ section, packages }) {
   return (
-    <section className="border-y border-cream-dark bg-cream-box py-20 lg:py-28">
+    <section className="border-y border-cream-dark bg-cream-box py-12 sm:py-16 lg:py-28">
       <Container size="lg">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-10 xl:gap-14">
           <div className="font-garamond">
@@ -48,10 +48,10 @@ export default function BeautyPackagesSection({ section, packages }) {
             {packages.map((pkg) => (
               <li
                 key={pkg.title}
-                className="flex items-center justify-between gap-4 py-5 sm:py-6"
+                className="flex flex-col gap-1 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-6"
               >
-                <span className="text-lg font-semibold text-ink sm:text-xl">{pkg.title}</span>
-                <span className="shrink-0 text-base font-medium text-charcoal sm:text-lg">
+                <span className="text-base font-semibold text-ink sm:text-xl">{pkg.title}</span>
+                <span className="shrink-0 text-sm font-medium text-charcoal sm:text-lg">
                   {pkg.price}
                 </span>
               </li>

@@ -1,3 +1,4 @@
+import clinicPageHero from '@/assets/clinic_page.png'
 import categoryClinic from '@/assets/CategoryClinic.png'
 import servicesImage from '@/assets/services.png'
 import gallery1 from '@/assets/gallery1.png'
@@ -8,7 +9,7 @@ import promotionsImg1 from '@/assets/promotionsImg1.png'
 
 export const clinicPageData = {
   hero: {
-    image: categoryClinic,
+    image: clinicPageHero,
     title: 'Clinic',
     description:
       'Advanced medical aesthetic treatments delivered by certified specialists — personalized care in a safe, clinical environment designed for visible, lasting results.',

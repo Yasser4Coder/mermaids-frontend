@@ -35,12 +35,12 @@ export default function SpaPage() {
       <ServicesCatalogSection catalog={spaServiceCatalog} />
       <SpaGallerySection images={gallery} />
 
-      <section className="py-20 lg:py-28">
+      <section className="py-12 sm:py-16 lg:py-28">
         <Container>
-          <h2 className="text-center font-garamond text-4xl font-bold tracking-wide text-ink sm:text-5xl lg:text-6xl">
+          <h2 className="text-center font-garamond text-3xl font-bold tracking-wide text-ink sm:text-5xl lg:text-6xl">
             What Our Clients Say
           </h2>
-          <div className="mt-14">
+          <div className="mt-10 sm:mt-14">
             <TestimonialSlider items={testimonials} />
           </div>
         </Container>

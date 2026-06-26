@@ -1,3 +1,4 @@
+import beautyCenterPageHero from '@/assets/beauty_center_page.png'
 import categoryBeautyCenter from '@/assets/CategoryBeautyCenter.png'
 import servicesImage from '@/assets/services.png'
 import exploringImg1 from '@/assets/ExploringImg1.png'
@@ -12,7 +13,7 @@ import ctaBg from '@/assets/cta.png'
 
 export const beautyCenterPageData = {
   hero: {
-    image: categoryBeautyCenter,
+    image: beautyCenterPageHero,
     title: 'Hair, Nails, Makeup & More',
     subtitle: 'All Your Beauty Needs, In One Place',
     description:

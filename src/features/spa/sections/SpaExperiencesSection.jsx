@@ -57,7 +57,7 @@ function ExperienceCard({ title, description, image, href }) {
 
 export default function SpaExperiencesSection({ section, experiences }) {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="py-12 sm:py-16 lg:py-28">
       <Container size="lg">
         <div className="mx-auto max-w-2xl text-center font-garamond">
           <p className="text-sm uppercase tracking-[0.2em] text-charcoal">{section.eyebrow}</p>
@@ -69,7 +69,7 @@ export default function SpaExperiencesSection({ section, experiences }) {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
           {experiences.map((exp) => (
             <ExperienceCard key={exp.id} {...exp} />
           ))}

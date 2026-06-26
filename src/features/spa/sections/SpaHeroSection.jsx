@@ -25,16 +25,16 @@ function SpaFeaturesBar({ features }) {
   return (
     <div className="border-y border-cream-dark bg-cream-box">
       <Container size="lg">
-        <ul className="grid grid-cols-1 gap-4 py-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4 lg:grid-cols-5 lg:gap-4 lg:py-7">
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-3 py-5 sm:gap-x-6 sm:gap-y-4 sm:py-6 lg:grid-cols-5 lg:gap-4 lg:py-7">
           {features.map((feature) => (
             <li
               key={feature.label}
-              className="flex items-center justify-center gap-3 font-garamond sm:justify-start lg:justify-center"
+              className="flex items-center gap-2.5 font-garamond sm:gap-3 lg:justify-center"
             >
               <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-cream-dark bg-white">
                 <FeatureIcon />
               </span>
-              <span className="text-sm text-ink sm:text-base">{feature.label}</span>
+              <span className="text-xs leading-snug text-ink sm:text-sm lg:text-base">{feature.label}</span>
             </li>
           ))}
         </ul>
@@ -46,7 +46,7 @@ function SpaFeaturesBar({ features }) {
 export default function SpaHeroSection({ hero }) {
   return (
     <>
-      <section className="relative min-h-[28rem] overflow-hidden sm:min-h-[32rem] lg:min-h-[36rem]">
+      <section className="relative min-h-[22rem] overflow-hidden sm:min-h-[28rem] lg:min-h-[36rem]">
         <img
           src={hero.image}
           alt=""
@@ -57,10 +57,10 @@ export default function SpaHeroSection({ hero }) {
 
         <Container
           size="lg"
-          className="relative flex min-h-[28rem] items-center py-14 sm:min-h-[32rem] sm:py-16 lg:min-h-[36rem] lg:py-20"
+          className="relative flex min-h-[22rem] items-end py-10 sm:min-h-[28rem] sm:items-center sm:py-16 lg:min-h-[36rem] lg:py-20"
         >
           <div className="max-w-2xl font-garamond">
-            <nav aria-label="Breadcrumb" className="text-sm uppercase tracking-[0.15em] text-white/70">
+            <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.15em] text-white/70 sm:text-sm">
               <Link to="/" className="transition-opacity hover:text-white">
                 Home
               </Link>
@@ -68,24 +68,24 @@ export default function SpaHeroSection({ hero }) {
               <span className="text-white">SPA</span>
             </nav>
 
-            <h1 className="mt-6 text-4xl font-bold leading-tight tracking-wide text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-wide text-white sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
               {hero.title}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg lg:text-xl">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/90 sm:mt-6 sm:text-base lg:text-xl">
               {hero.description}
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
               <Link
                 to={hero.primaryCta.href}
-                className="inline-flex cursor-pointer items-center gap-2 border border-white bg-white px-8 py-3 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-transparent hover:text-white sm:text-base"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 border border-white bg-white px-8 py-3.5 font-garamond text-sm uppercase tracking-[0.15em] text-ink transition-colors hover:bg-transparent hover:text-white sm:justify-start sm:py-3 sm:text-base"
               >
                 {hero.primaryCta.label}
                 <span aria-hidden="true">→</span>
               </Link>
               <a
                 href={hero.secondaryCta.href}
-                className="inline-flex cursor-pointer items-center gap-2 border border-white px-8 py-3 font-garamond text-sm uppercase tracking-[0.15em] text-white transition-colors hover:bg-white hover:text-ink sm:text-base"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 border border-white px-8 py-3.5 font-garamond text-sm uppercase tracking-[0.15em] text-white transition-colors hover:bg-white hover:text-ink sm:justify-start sm:py-3 sm:text-base"
               >
                 {hero.secondaryCta.label}
                 <span aria-hidden="true">→</span>
