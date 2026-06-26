@@ -366,3 +366,10 @@ export function getRelatedProducts(product, limit = 4) {
     .slice(0, limit)
     .map(enrichProduct)
 }
+
+export function getFeaturedProducts(limit = 4) {
+  return shopProducts
+    .filter((item) => item.badge || item.collections.includes('best-sellers'))
+    .slice(0, limit)
+    .map(enrichProduct)
+}

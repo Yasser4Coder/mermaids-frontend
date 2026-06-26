@@ -9,6 +9,8 @@ import MagasinPage from '@/features/magasin/MagasinPage'
 import ProductPage from '@/features/magasin/ProductPage'
 import BookPage from '@/features/book/BookPage'
 import ContactPage from '@/features/contact/ContactPage'
+import CartPage from '@/features/cart/CartPage'
+import AccountPage from '@/features/account/AccountPage'
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
       {
         path: 'contact',
         element: <ContactPage />,
+      },
+      {
+        path: 'cart',
+        element: <CartPage />,
+      },
+      {
+        path: 'account',
+        element: <AccountPage />,
       },
       {
         path: 'magasin/product/:productId',

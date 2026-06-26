@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import Container from '@/components/common/Container'
 import WireframePlaceholder from '@/components/services/WireframePlaceholder'
 import ShopProductCard from '@/components/shop/ShopProductCard'
+import { useCart } from '@/context/CartContext'
 import { getProductById, getRelatedProducts, magasinPageData } from '@/data/magasin'
 
 const colorMap = Object.fromEntries(
@@ -67,6 +68,7 @@ function ProductTabs({ product }) {
 export default function ProductPage() {
   const { productId } = useParams()
   const navigate = useNavigate()
+  const { addItem } = useCart()
   const product = getProductById(productId)
 
   const [activeImage, setActiveImage] = useState(0)
@@ -226,7 +228,10 @@ export default function ProductPage() {
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
-                onClick={() => navigate('/cart')}
+                onClick={() => {
+                  addItem(product, { quantity, color: selectedColor })
+                  navigate('/cart')
+                }}
                 className="flex flex-1 cursor-pointer items-center justify-center gap-2 border border-ink bg-ink px-8 py-3.5 text-sm uppercase tracking-[0.2em] text-cream transition-colors hover:bg-charcoal-dark"
               >
                 Add to Cart

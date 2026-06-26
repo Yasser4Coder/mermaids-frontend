@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Container from '@/components/common/Container'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher'
 import SiteMenu from '@/components/layout/SiteMenu'
+import { useCart } from '@/context/CartContext'
 
 function MenuIcon({ open }) {
   if (open) {
@@ -36,14 +37,19 @@ function BagIcon() {
   )
 }
 
-function HeaderIconLink({ to, label, children }) {
+function HeaderIconLink({ to, label, children, badge }) {
   return (
     <Link
       to={to}
       aria-label={label}
-      className="flex size-10 shrink-0 cursor-pointer items-center justify-center text-ink transition-opacity hover:opacity-70"
+      className="relative flex size-10 shrink-0 cursor-pointer items-center justify-center text-ink transition-opacity hover:opacity-70"
     >
       {children}
+      {badge > 0 && (
+        <span className="absolute -top-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full bg-ink text-[10px] leading-none font-medium text-cream">
+          {badge > 9 ? '9+' : badge}
+        </span>
+      )}
     </Link>
   )
 }
@@ -51,6 +57,7 @@ function HeaderIconLink({ to, label, children }) {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const closeMenu = useCallback(() => setMenuOpen(false), [])
+  const { itemCount } = useCart()
 
   return (
     <>
@@ -87,7 +94,7 @@ export default function Header() {
                 Contactez-nous
               </Link>
               <LanguageSwitcher className="hidden md:block" />
-              <HeaderIconLink to="/cart" label="Shopping bag">
+              <HeaderIconLink to="/cart" label="Shopping bag" badge={itemCount}>
                 <BagIcon />
               </HeaderIconLink>
               <HeaderIconLink to="/account" label="Account">

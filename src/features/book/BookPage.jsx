@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Container from '@/components/common/Container'
 import WireframePlaceholder from '@/components/services/WireframePlaceholder'
+import { useAccount } from '@/context/AccountContext'
 import { bookingPageData } from '@/data/booking'
 
 const initialForm = {
@@ -37,6 +38,7 @@ export default function BookPage() {
 
   const [form, setForm] = useState(initialForm)
   const [submitted, setSubmitted] = useState(false)
+  const { isAuthenticated, addAppointment } = useAccount()
 
   const categoryFromUrl = searchParams.get('category') ?? ''
   const serviceFromUrl = searchParams.get('service') ?? ''
@@ -71,6 +73,18 @@ export default function BookPage() {
 
   function handleSubmit(event) {
     event.preventDefault()
+
+    if (isAuthenticated) {
+      const categoryLabel =
+        serviceCategories.find((item) => item.id === form.category)?.label ?? form.category
+      addAppointment({
+        service: form.service,
+        category: categoryLabel,
+        date: form.date,
+        time: form.time,
+      })
+    }
+
     setSubmitted(true)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
